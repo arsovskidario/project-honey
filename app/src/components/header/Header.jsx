@@ -1,17 +1,29 @@
-import { Link } from "react-router-dom";
+
 import './Header.css';
+import { useState } from "react";
+import PageNavigation from "./page-navigation/PageNavigation";
 export default function Header() {
+    const [isDropDownToggled, setIsDropDownToggled] = useState('hidden');
+
+    function dropDownHandler() {
+        if (isDropDownToggled === 'hidden') {
+            setIsDropDownToggled('flex');
+        } else {
+            setIsDropDownToggled('hidden');
+        }
+    }
+
     return (
 
-        <nav className="bg-white border-b border-cfb491 overflow-hidden">
+        <nav className="bg-white border-b border-cfb491">
             <div className="max-w-full flex flex-wrap items-center justify-between mx-auto sticky top-0">
                 <div className="m-4 flex">
                     <img src="/src/assets/logo.png" className="h-20" alt="balkan-nectar-logo" />
                 </div>
 
                 <div className="items-center hidden md:order-3 md:block mr-1">
-                    <button className = "p-4 text-gray-800 hover:text-cfb491 focus:outline-none focus:text-cfb491">
-                        <svg  className="h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                    <button className="p-4 text-gray-800 hover:text-cfb491 focus:outline-none focus:text-cfb491">
+                        <svg className="h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                             <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
                         </svg>
                     </button>
@@ -30,7 +42,7 @@ export default function Header() {
 
                 <div className="flex justify-center md:order-2">
                     <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" className="md:hidden relative p-4 text-cfb491 hover:bg-gray-100 focus:outline-none focus:ring-gray-200">
-                    <svg className="h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                         </svg>
                         <span className="absolute inset-0 object-right-top -mr-6">
@@ -48,14 +60,20 @@ export default function Header() {
                         </div>
                         <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-5 hover:border-cfb491 focus:border-cfb491 focus:outline-none" placeholder="Search..." />
                     </div>
-                    <button data-collapse-toggle="navbar-search" type="button" className="object-center ml-6 p-4 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                        aria-controls="navbar-search" aria-expanded="false">
-                        <svg className="w-5 h-5 text-cfb491" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 17">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
-                        </svg>
-                    </button>
+                        <button data-collapse-toggle="navbar-search"
+                            type="button"
+                            className="object-center ml-6 p-4 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                            aria-controls="navbar-search"
+                            aria-expanded="false"
+                            onClick={dropDownHandler}>
+                            <svg className="w-5 h-5 text-cfb491" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 17">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
+                            </svg>
+                        </button>
+                        <div className={`md:hidden absolute top-[50%] xs:top-[85%] overflow-visible ${isDropDownToggled}`}>
+                            <PageNavigation direction='flex-col' isDropDownToggled={isDropDownToggled}/>
+                        </div>
                 </div>
-
 
 
 
@@ -66,20 +84,11 @@ export default function Header() {
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </div>
-    
+
                     </div>
-                    <ul className="flex flex-col p-4 md:p-6 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
-                        <li>
-                            <Link to="#" className="list-item">Honey</Link>
-                        </li>
-                        <li>
-                            <Link to="#" className="list-item" >Pollen</Link>
-                        </li>
-                        <li>
-                            <Link to="#" className="list-item">Gifts</Link>
-                        </li>
-                    </ul>
+                    <PageNavigation direction='flex-row'/>
                 </div>
+
 
             </div>
         </nav>

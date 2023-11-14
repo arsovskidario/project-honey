@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
 export default {
   content: [
     "./index.html",
@@ -9,6 +10,10 @@ export default {
       colors: {
         cfb491: '#cfb491',
       },
+    },
+    screens: {
+      'xs': {'max': '335px'},
+      ...defaultTheme.screens,
     },
   },
   plugins: [],
