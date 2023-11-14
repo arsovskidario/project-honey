@@ -2,19 +2,19 @@ import { Link } from "react-router-dom";
 export default function Header() {
     return (
 
-        <nav className="bg-white border-b border-cfb491">
-            <div className="max-w-full flex flex-wrap items-center justify-between mx-auto p-4 sticky top-0">
-                <div className="flex">
-                    <img src="/src/assets/logo.png" className="h-40" alt="balkan-nectar-logo" />
+        <nav className="bg-white border-b border-cfb491 overflow-hidden">
+            <div className="max-w-full flex flex-wrap items-center justify-between mx-auto sticky top-0">
+                <div className="m-4 flex">
+                    <img src="/src/assets/logo.png" className="h-20" alt="balkan-nectar-logo" />
                 </div>
 
-                <div className="items-center hidden md:order-3 md:block">
-                    <button className = "py-4 px-1  text-gray-800 hover:text-cfb491 focus:outline-none focus:text-cfb491">
+                <div className="items-center hidden md:order-3 md:block mr-1">
+                    <button className = "p-4 text-gray-800 hover:text-cfb491 focus:outline-none focus:text-cfb491">
                         <svg  class="h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                             <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
                         </svg>
                     </button>
-                    <button className="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-cfb491 focus:outline-none focus:text-cfb491 transition duration-150 ease-in-out" aria-label="Cart">
+                    <button className="p-4  relative border-2 border-transparent text-gray-800 rounded-full hover:text-cfb491 focus:outline-none focus:text-cfb491 transition duration-150 ease-in-out" aria-label="Cart">
                         <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                         </svg>
@@ -58,7 +58,7 @@ export default function Header() {
 
 
 
-                <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
+                <div className="ml-0 items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
                     <div className="relative mt-3 md:hidden">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <svg className="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20">
@@ -67,15 +67,15 @@ export default function Header() {
                         </div>
                         <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-cfb491 focus:border-cfb491" placeholder="Search..." />
                     </div>
-                    <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
+                    <ul className="flex flex-col p-4 md:p-6 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                         <li>
-                            <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cfb491 md:p-0 md:cfb491">Honey</a>
+                            <Link to="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cfb491 md:p-0 md:cfb491">Honey</Link>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cfb491 md:p-0 md:cfb491" >Pollen</a>
+                            <Link to="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cfb491 md:p-0 md:cfb491" >Pollen</Link>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cfb491 md:p-0 md:cfb491">Gifts</a>
+                            <Link to="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cfb491 md:p-0 md:cfb491">Gifts</Link>
                         </li>
                     </ul>
                 </div>
