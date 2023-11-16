@@ -60,19 +60,19 @@ export default function Header() {
                         </div>
                         <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-5 hover:border-cfb491 focus:border-cfb491 focus:outline-none" placeholder="Search..." />
                     </div>
-                        <button data-collapse-toggle="navbar-search"
-                            type="button"
-                            className="object-center ml-6 p-4 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                            aria-controls="navbar-search"
-                            aria-expanded="false"
-                            onClick={dropDownHandler}>
-                            <svg className="w-5 h-5 text-cfb491" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 17">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
-                            </svg>
-                        </button>
-                        <div className={`md:hidden absolute top-[50%] xs:top-[85%] overflow-visible ${isDropDownToggled}`}>
-                            <PageNavigation direction='flex-col' isDropDownToggled={isDropDownToggled}/>
-                        </div>
+                    <button data-collapse-toggle="navbar-search"
+                        type="button"
+                        className="object-center ml-6 p-4 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                        aria-controls="navbar-search"
+                        aria-expanded="false"
+                        onClick={dropDownHandler}>
+                        <svg className="w-5 h-5 text-cfb491" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 17">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
+                        </svg>
+                    </button>
+                    <div className={`md:hidden absolute top-[50%] xs:top-[85%] overflow-visible ${isDropDownToggled}`}>
+                        <PageNavigation direction='flex-col' isDropDownToggled={isDropDownToggled}/>
+                    </div>
                 </div>
 
 

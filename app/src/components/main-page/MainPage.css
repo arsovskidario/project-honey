@@ -1,0 +1,61 @@
+.hex-btn {
+	position: relative;
+	width: 150px;
+	height: 50px;
+	margin: 10px;
+	color: #FFFFFF;
+	background-color: #cfb491;
+	text-align: center;
+	line-height: 48px;
+    padding: 0px;
+	font-weight: bold;
+}
+
+
+
+.hex-btn:before {
+     content:"";
+       transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -moz-transform: rotate(45deg); 
+    background-color: #cfb491;
+    border: 5px solid white;
+    width:38px;
+    height:39px;
+    top: 5.3px;
+    right: 85%;
+    position:absolute;
+    border-radius:6px;
+    z-index:-1;
+   }
+
+.hex-btn:after {
+       content:"";
+       transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -moz-transform: rotate(45deg); 
+    background-color: #cfb491;
+    border: 5px solid white;
+    width:38px;
+    height:39px;
+    top: 5.3px;
+    left: 85%;
+    position:absolute;
+    border-radius:6px;
+    z-index:-1;
+}
+
+.hex-btn:hover {
+    background-color: #edd4b3; /* Change background color on hover */
+}
+
+.hex-btn:hover:before {
+    background-color: #edd4b3; /* Change background color on hover */
+}
+.hex-btn:hover:after {
+    background-color: #edd4b3; /* Change background color on hover */
+}
