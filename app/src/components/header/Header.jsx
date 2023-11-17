@@ -1,6 +1,7 @@
 
 import './Header.css';
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import PageNavigation from "./page-navigation/PageNavigation";
 export default function Header() {
     const [isDropDownToggled, setIsDropDownToggled] = useState('hidden');
@@ -18,7 +19,9 @@ export default function Header() {
         <nav className="bg-white border-b border-cfb491">
             <div className="max-w-full flex flex-wrap items-center justify-between mx-auto sticky top-0">
                 <div className="m-4 flex">
+                <Link to="/">
                     <img src="/src/assets/logo.png" className="h-20" alt="balkan-nectar-logo" />
+                </Link>
                 </div>
 
                 <div className="items-center hidden md:order-3 md:block mr-1">

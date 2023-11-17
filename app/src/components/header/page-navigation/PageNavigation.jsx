@@ -8,7 +8,7 @@ export default function PageNavigation({
     return (
         <ul className={`flex ${direction} list`}>
             <li>
-                <Link to="#" className="list-item">Honey</Link>
+                <Link to="honey" className="list-item">Honey</Link>
             </li>
             <li>
                 <Link to="#" className="list-item" >Pollen</Link>
