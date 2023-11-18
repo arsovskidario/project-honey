@@ -15,8 +15,9 @@ export default {
       },
     },
     screens: {
-      'xs': {'max': '335px'},
       ...defaultTheme.screens,
+      'xs': {'max': '335px'},
+      'md': '783px',
     },
   },
   plugins: [],

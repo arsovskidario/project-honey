@@ -1,18 +1,23 @@
+import { Link } from "react-router-dom"
+
 export default function ProductCard({
+    _id,
     name,
     price,
     rating,
     imgUrl
 }) {
     return (
-        <div className="overflow-hidden bg-productWhite border border-gray-200 rounded-lg shadow">
-            <a href="#">
-                <img className="p-8 rounded-t-lg object-cover object-center" src={imgUrl} alt="product image" />
-            </a>
+        <div className="p-8 md:flex md:justify-center md:items-center overflow-hidden bg-productWhite border border-gray-200 rounded-lg shadow">
+
+            <Link to={`product-details/${_id}`}>
+                <img className="rounded-t-lg" src={imgUrl} alt={`${name} image`} />
+            </Link>
+
             <div className="px-5 pb-5">
-                <a href="#">
+                <Link to={`product-details/${_id}`}>
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900">{name}</h5>
-                </a>
+                </Link>
                 <div className="flex items-center mt-2.5 mb-5">
                     <div className="flex items-center space-x-1 rtl:space-x-reverse">
                         <svg className="w-4 h-4 text-starsBrown" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import ProductCard from "../../product/ProductCard";
+import ProductCard from "../../product/card/ProductCard";
 import { getAllProducts } from "../../../services/productsService";
 
 export default function FeaturedProdcuts() {

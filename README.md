@@ -12,6 +12,15 @@
 - [ ] Documentation/project structure
 
 
+### Additional functionality
+#### MainPage:
+- [ ] Newsletter section that displays recent blogs
+
 ### Design todo
+- [ ] Make pictures responsive in product features
 - [ ] make img for products transparent
 - [ ] change color pallete
+
+### Error handling
+- [ ] Error page
+- [ ] Loading spinner -> mainpage featured productrs, product details page
