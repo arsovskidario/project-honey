@@ -9,6 +9,9 @@ export default {
     extend: {
       colors: {
         cfb491: '#cfb491',
+        starsBrown: '#BD871F',
+        productWhite: '#FFF8EE',
+        btnHover: '#edd4b3'
       },
     },
     screens: {

@@ -22,7 +22,7 @@ export default function FeaturedProdcuts() {
     return (
         <section className="flex flex-col items-center">
             <h1 className="mt-10 text-2xl">Featured Products</h1>
-            <div id="featured-products" className="flex flex-row justify-center mt-5">
+            <div id="featured-products" className="w-full flex flex-row justify-center mt-5">
                 {featuredProducts.map(product =>
                    <ProductCard key={product._id} {...product} />
                 )}
