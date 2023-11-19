@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import './PageNavigation.css'
+
 export default function PageNavigation({
     direction,
     isDropDownToggled
@@ -11,10 +12,10 @@ export default function PageNavigation({
                 <Link to="honey" className="list-item">Honey</Link>
             </li>
             <li>
-                <Link to="#" className="list-item" >Pollen</Link>
+                <Link to="pollen" className="list-item" >Pollen</Link>
             </li>
             <li>
-                <Link to="#" className="list-item">Gifts</Link>
+                <Link to="gifts" className="list-item">Gifts</Link>
             </li>
             {isDropDownToggled && (<li>
                 <Link to="#" className="list-item">User</Link>

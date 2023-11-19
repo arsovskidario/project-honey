@@ -12,6 +12,9 @@
 - [ ] Documentation/project structure
 
 
+### Must
+- [ ] Featured items should filter to fetch only name,img, review, id of item
+
 ### Additional functionality
 #### MainPage:
 - [ ] Newsletter section that displays recent blogs

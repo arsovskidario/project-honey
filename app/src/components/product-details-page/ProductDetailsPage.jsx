@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
 import ProductDetails from "../product/details/ProductDetails";
+import ProductReviews from "./reviews/ProductReviews";
 
 export default function ProductDetailsPage() {
     const { productId } = useParams();
+    
     return (
-        <section>
-            <h1>Product details page</h1>
+        <main>
             <ProductDetails _id={productId} />
-        </section>
+            <ProductReviews _id={productId} />
+        </main>
     )
 }
