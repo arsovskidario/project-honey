@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
 import ProductDetails from "../product/details/ProductDetails";
+import ProductReviews from "./reviews/ProductReviews";
 
 export default function ProductDetailsPage() {
     const { productId } = useParams();
-    //TODO: Probably have to fetch element here instead of in details
+    
     return (
         <main>
             <ProductDetails _id={productId} />
+            <ProductReviews _id={productId} />
         </main>
     )
 }
