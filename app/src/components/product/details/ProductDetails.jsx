@@ -13,7 +13,6 @@ export default function ProductDetails({
     useEffect(() => {
         getProductInfo(_id).then(
             data => {
-                console.log(data)
                 setCurrentProduct(data);
             }
         ).catch(error =>
@@ -33,6 +32,20 @@ export default function ProductDetails({
         const productUrl = window.location.href
         navigator.clipboard.writeText(productUrl);
     };
+
+    const onChangeQuantityHandler = (e) => {
+        setOrderQuantity(e.target.value);
+    }
+
+    const addToCardHandler = () => {
+        console.log(orderQuantity)
+    }
+
+    const items = [];
+
+    for (let i = 1; i <= 10; i++) {
+      items.push(<option key={i} value={i}>{i}</option>);
+    }
 
     return (
         <section id={`product-${_id}`} className="bg-productWhite mt-10">
@@ -66,13 +79,22 @@ export default function ProductDetails({
                     <p>{currentProduct.description}</p>
                 </div>
                 <div id="product-buy" className="flex flex-col w-1/8 p-2">
-                    <span className="m-1 text-xs font-semibold px-2.5 py-0.5 roundedms-3 overflow-clip">Quantity: <span className="text-starsBrown">{orderQuantity}</span> </span>
-                    <button className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-2.5 py-1.5 text-center overflow-clip">Add to cart</button>
+                    <label htmlFor="countries" className="block mb-2 text-sm font-medium text-starsBrown">Quantity:</label>
+                    <select id="countries"
+                        onChange={onChangeQuantityHandler}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
+                        {items}
+                    </select>
+
+                    <button onClick={addToCardHandler}
+                        className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-2.5 py-1.5 text-center overflow-clip">
+                        Add to cart
+                    </button>
                     <button onClick={copyToClipboardHanlder}
                         className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-5 py-2.5 text-center overflow-clip">
-                        {!copied 
-                        ? "Share" 
-                        : "Copied!"}
+                        {!copied
+                            ? "Share"
+                            : "Copied!"}
                     </button>
                 </div>
             </div>
