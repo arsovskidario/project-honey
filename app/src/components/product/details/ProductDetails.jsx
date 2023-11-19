@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { getProductInfo } from "../../../services/productsService";
 
-
 export default function ProductDetails({
     _id
 }) {
     const navigate = useNavigate();
     const [currentProduct, setCurrentProduct] = useState({});
     const [orderQuantity, setOrderQuantity] = useState(0);
+    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
         getProductInfo(_id).then(
@@ -21,14 +21,27 @@ export default function ProductDetails({
         )
     }, [])
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if (copied) setCopied(false);
+        }, 1000);
+        return () => clearTimeout(timeout);
+    }, [copied]);
+
+    const copyToClipboardHanlder = () => {
+        setCopied(true);
+        const productUrl = window.location.href
+        navigator.clipboard.writeText(productUrl);
+    };
+
     return (
-        <section id={`product-${_id}`} className="bg-productWhite">
-            <Link to={`/${currentProduct.category}`} className="text-starsBrown" >{`home > ${currentProduct.category}`}</Link>
-            <div className="flex flex-row justify-between pb-5">
-                <div id="product-img">
+        <section id={`product-${_id}`} className="bg-productWhite mt-10">
+            <Link to={`/${currentProduct.category}`} className="text-starsBrown ml-4" >{`home > ${currentProduct.category}`}</Link>
+            <div className="flex flex-row justify-center items-center pb-5">
+                <div id="product-img" className="w-1/6 p-2">
                     <img src={currentProduct.imgUrl} />
                 </div>
-                <div id="product-info">
+                <div id="product-info" className="w-1/2 p-2">
                     <h1>{currentProduct.name}</h1>
                     <div>
                         <div className="flex items-center space-x-1 rtl:space-x-reverse">
@@ -52,10 +65,15 @@ export default function ProductDetails({
                     </div>
                     <p>{currentProduct.description}</p>
                 </div>
-                <div id="product-buy" className="flex flex-col">
+                <div id="product-buy" className="flex flex-col w-1/8 p-2">
                     <span className="m-1 text-xs font-semibold px-2.5 py-0.5 roundedms-3 overflow-clip">Quantity: <span className="text-starsBrown">{orderQuantity}</span> </span>
                     <button className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-2.5 py-1.5 text-center overflow-clip">Add to cart</button>
-                    <button className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-5 py-2.5 text-center overflow-clip">Share</button>
+                    <button onClick={copyToClipboardHanlder}
+                        className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-5 py-2.5 text-center overflow-clip">
+                        {!copied 
+                        ? "Share" 
+                        : "Copied!"}
+                    </button>
                 </div>
             </div>
         </section>
