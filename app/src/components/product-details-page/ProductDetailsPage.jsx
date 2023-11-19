@@ -6,7 +6,6 @@ export default function ProductDetailsPage() {
     //TODO: Probably have to fetch element here instead of in details
     return (
         <main>
-            <h1>Breadtrails</h1>
             <ProductDetails _id={productId} />
         </main>
     )
