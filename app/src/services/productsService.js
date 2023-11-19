@@ -8,3 +8,14 @@ export async function getAllProducts() {
     
     return response.json();
 }
+
+export async function getProductInfo(_id) {
+    const url = `${baseUrl}/${_id}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Service is unavaibable');
+    }
+    
+    return response.json();
+}
+
