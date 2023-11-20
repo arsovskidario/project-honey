@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { ShoppingCartContext } from "../../../../contexts/ShoppingCartContext";
 
 export default function Buy({
     _id
@@ -23,8 +24,10 @@ export default function Buy({
         setOrderQuantity(e.target.value);
     }
 
-    const addToCardHandler = () => {
-        console.log(orderQuantity)
+    const {addCartItems} = useContext(ShoppingCartContext);
+
+    const addItemToCartHandler = () => {
+        addCartItems({_id, orderQuantity});
     }
 
     const options = Array.from({ length: 10 }, (_, i) => (
@@ -45,7 +48,7 @@ export default function Buy({
             </select>
             </div>
 
-            <button onClick={addToCardHandler}
+            <button onClick={addItemToCartHandler}
                 className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-2.5 py-1.5 text-center overflow-clip">
                 Add to cart
             </button>

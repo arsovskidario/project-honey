@@ -1,10 +1,15 @@
+import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
 
 import './Header.css';
-import { useState } from "react";
-import { Link } from "react-router-dom";
+
 import PageNavigation from "./page-navigation/PageNavigation";
+import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
+
 export default function Header() {
     const [isDropDownToggled, setIsDropDownToggled] = useState('hidden');
+    
+    const {cart} = useContext(ShoppingCartContext)
 
     function dropDownHandler() {
         if (isDropDownToggled === 'hidden') {
@@ -36,7 +41,7 @@ export default function Header() {
                         </svg>
                         <span className="cart-counter-span">
                             <div className="cart-counter">
-                                0
+                                {cart.length}
                             </div>
                         </span>
                     </button>
@@ -50,7 +55,7 @@ export default function Header() {
                         </svg>
                         <span className="absolute inset-0 object-right-top -mr-6">
                             <div className="cart-counter">
-                                0
+                            {cart.length}
                             </div>
                         </span>
                     </button>
