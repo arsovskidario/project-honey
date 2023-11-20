@@ -8,6 +8,7 @@ import Footer from './components/Footer'
 import MainPage from './components/main-page/MainPage'
 import HoneyPage from './components/honey-page/HoneyPage'
 import ProductDetailsPage from './components/product-details-page/ProductDetailsPage'
+import CheckOutPage from './components/checkout-page/CheckOutPage'
 
 const initialCart = JSON.parse(localStorage.getItem('cart') || '[]');
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/honey" element={<HoneyPage />} />
         <Route path="/product-details/:productId" element={<ProductDetailsPage />} />
+        <Route path="/checkout" element={<CheckOutPage />} />
       </Routes>
 
       <Footer />

@@ -8,8 +8,8 @@ import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
 
 export default function Header() {
     const [isDropDownToggled, setIsDropDownToggled] = useState('hidden');
-    
-    const {cart} = useContext(ShoppingCartContext)
+
+    const { cart } = useContext(ShoppingCartContext)
 
     function dropDownHandler() {
         if (isDropDownToggled === 'hidden') {
@@ -24,9 +24,9 @@ export default function Header() {
         <nav className="bg-white border-b border-cfb491">
             <div className="max-w-full flex flex-wrap items-center justify-between mx-auto sticky top-0">
                 <div className="m-4 flex">
-                <Link to="/">
-                    <img src="/src/assets/logo.png" className="h-20" alt="balkan-nectar-logo" />
-                </Link>
+                    <Link to="/">
+                        <img src="/src/assets/logo.png" className="h-20" alt="balkan-nectar-logo" />
+                    </Link>
                 </div>
 
                 <div className="items-center hidden md:order-3 md:block mr-1">
@@ -35,30 +35,34 @@ export default function Header() {
                             <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
                         </svg>
                     </button>
-                    <button className="p-4  relative border-2 border-transparent text-gray-800 rounded-full hover:text-cfb491 focus:outline-none focus:text-cfb491 transition duration-150 ease-in-out" aria-label="Cart">
-                        <svg className="h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                        <span className="cart-counter-span">
-                            <div className="cart-counter">
-                                {cart.length}
-                            </div>
-                        </span>
-                    </button>
+                    <Link to="/checkout">
+                        <button className="p-4  relative border-2 border-transparent text-gray-800 rounded-full hover:text-cfb491 focus:outline-none focus:text-cfb491 transition duration-150 ease-in-out" aria-label="Cart">
+                            <svg className="h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <span className="cart-counter-span">
+                                <div className="cart-counter">
+                                    {cart.length}
+                                </div>
+                            </span>
+                        </button>
+                    </Link>
                 </div>
 
 
                 <div className="flex justify-center md:order-2">
-                    <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" className="md:hidden relative p-4 text-cfb491 hover:bg-gray-100 focus:outline-none focus:ring-gray-200">
-                        <svg className="h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                        <span className="absolute inset-0 object-right-top -mr-6">
-                            <div className="cart-counter">
-                            {cart.length}
-                            </div>
-                        </span>
-                    </button>
+                    <Link to="/checkout">
+                        <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" className="md:hidden relative p-4 text-cfb491 hover:bg-gray-100 focus:outline-none focus:ring-gray-200">
+                            <svg className="h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <span className="absolute inset-0 object-right-top -mr-6">
+                                <div className="cart-counter">
+                                    {cart.length}
+                                </div>
+                            </span>
+                        </button>
+                    </Link>
                     <div className="relative hidden md:block">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <svg className="w-4 h-4 text-cfb491" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -79,7 +83,7 @@ export default function Header() {
                         </svg>
                     </button>
                     <div className={`md:hidden absolute top-[50%] xs:top-[85%] overflow-visible ${isDropDownToggled}`}>
-                        <PageNavigation direction='flex-col' isDropDownToggled={isDropDownToggled}/>
+                        <PageNavigation direction='flex-col' isDropDownToggled={isDropDownToggled} />
                     </div>
                 </div>
 
@@ -94,13 +98,11 @@ export default function Header() {
                         </div>
 
                     </div>
-                    <PageNavigation direction='flex-row'/>
+                    <PageNavigation direction='flex-row' />
                 </div>
 
 
             </div>
         </nav>
-
-
     );
 }
