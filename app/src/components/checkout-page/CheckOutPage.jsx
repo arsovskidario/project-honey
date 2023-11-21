@@ -3,7 +3,7 @@ import { ShoppingCartContext } from "../../contexts/ShoppingCartContext"
 import CheckoutItem from "./CheckoutItem";
 
 export default function CheckOutPage() {
-    const { cart, clearCart} = useContext(ShoppingCartContext);
+    const { cart, clearCart, clearItem } = useContext(ShoppingCartContext);
     const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
@@ -36,7 +36,7 @@ export default function CheckOutPage() {
             <div id="cart-itemns" className="m-4 border-4 border-white">
                 <ul>
                     {cart.map(item =>
-                        <li key={item._id}><CheckoutItem {...item} /></li>)}
+                        <li key={item._id}><CheckoutItem clearItem={clearItem.bind(null, item)} {...item} /></li>)}
                 </ul>
             </div>
 

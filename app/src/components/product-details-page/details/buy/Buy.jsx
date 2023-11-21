@@ -24,12 +24,11 @@ export default function Buy({
         setOrderQuantity(e.target.value);
     }
 
-    const {addCartItems, updateCartSize} = useContext(ShoppingCartContext);
+    const {addCartItems} = useContext(ShoppingCartContext);
 
     const addItemToCartHandler = () => {
         const currItem = {...item, orderQuantity};
         addCartItems(currItem);
-        updateCartSize(currItem);
     }
 
     const options = Array.from({ length: 10 }, (_, i) => (

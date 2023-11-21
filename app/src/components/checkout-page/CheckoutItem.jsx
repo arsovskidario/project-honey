@@ -2,9 +2,11 @@ export default function CheckoutItem({
     imgUrl,
     name,
     price,
-    orderQuantity
+    orderQuantity,
+    clearItem
 }) {
-    return <div className="flex justify-between">
+
+    return <div className="flex justify-between items-center">
         <div id="product-img" className="p-2 w-1/4">
             <img src={imgUrl} alt="product-image" />
         </div>
@@ -18,8 +20,12 @@ export default function CheckoutItem({
             <h1>Quantity: {orderQuantity}</h1>
         </div>
 
-        <div id="product-subtotal" className="p-2 w-1/4">
-            <h1>Subtotal: <span className="font-bold">${ (price * orderQuantity).toFixed(2)}</span> </h1>
+        <div id="product-subtotal" className="p-2 w-1/4 flex">
+            <h1>Subtotal: <span className="font-bold">${(price * orderQuantity).toFixed(2)}</span> </h1>
+            <button onClick={clearItem}
+                className="ml-10 p-4 rounded-lg text-white bg-cfb491 hover:bg-btnHover font-medium text-sm text-center">
+                Delete
+            </button>
         </div>
 
     </div>

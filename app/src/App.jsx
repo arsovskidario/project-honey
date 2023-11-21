@@ -17,13 +17,14 @@ function App() {
   const [cartSize, setCartSize] = useState(initialCartSize);
 
   useEffect(() => {
+    setCartSize(oldSize => {
+      return cart.reduce( 
+        (accumulate, cartItem) => accumulate + Number(cartItem.orderQuantity),
+         0)
+    });
     localStorage.setItem('cart', JSON.stringify(cart))
-  }, [cart])
-
-
-  useEffect(() => {
     localStorage.setItem('cartSize', JSON.stringify(cartSize))
-  }, [cartSize])
+  }, [cart, cartSize])
 
 
   const addCartItems = (item) => {
@@ -41,8 +42,11 @@ function App() {
     })
   };
 
-  const updateCartSize = (item) => {
-    setCartSize(oldSize => oldSize + Number(item.orderQuantity));
+  const clearItem = (item) => {
+
+    setCart (oldCart => 
+      oldCart.filter( cartItem => cartItem._id != item._id)
+    )
   }
 
   const clearCart = () => {
@@ -56,7 +60,7 @@ function App() {
     cart,
     cartSize,
     addCartItems,
-    updateCartSize,
+    clearItem,
     clearCart
   }
 
