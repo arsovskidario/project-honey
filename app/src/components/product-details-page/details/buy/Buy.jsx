@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { ShoppingCartContext } from "../../../../contexts/ShoppingCartContext";
 
 export default function Buy({
-    _id
+    item
 }) {
     const [orderQuantity, setOrderQuantity] = useState(1);
     const [copied, setCopied] = useState(false);
@@ -24,10 +24,12 @@ export default function Buy({
         setOrderQuantity(e.target.value);
     }
 
-    const {addCartItems} = useContext(ShoppingCartContext);
+    const {addCartItems, updateCartSize} = useContext(ShoppingCartContext);
 
     const addItemToCartHandler = () => {
-        addCartItems({_id, orderQuantity});
+        const currItem = {...item, orderQuantity};
+        addCartItems(currItem);
+        updateCartSize(currItem);
     }
 
     const options = Array.from({ length: 10 }, (_, i) => (

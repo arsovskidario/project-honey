@@ -51,7 +51,7 @@ export default function ProductDetails({
                     </div>
                     <p>{currentProduct.description}</p>
                 </div>
-               <Buy _id={_id}/>
+               <Buy item={currentProduct}/>
             </div>
         </section>
     );

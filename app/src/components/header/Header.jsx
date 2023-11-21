@@ -9,7 +9,7 @@ import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
 export default function Header() {
     const [isDropDownToggled, setIsDropDownToggled] = useState('hidden');
 
-    const { cart } = useContext(ShoppingCartContext)
+    const { cartSize } = useContext(ShoppingCartContext)
 
     function dropDownHandler() {
         if (isDropDownToggled === 'hidden') {
@@ -42,7 +42,7 @@ export default function Header() {
                             </svg>
                             <span className="cart-counter-span">
                                 <div className="cart-counter">
-                                    {cart.length}
+                                    {cartSize}
                                 </div>
                             </span>
                         </button>
@@ -58,7 +58,7 @@ export default function Header() {
                             </svg>
                             <span className="absolute inset-0 object-right-top -mr-6">
                                 <div className="cart-counter">
-                                    {cart.length}
+                                    {cartSize}
                                 </div>
                             </span>
                         </button>

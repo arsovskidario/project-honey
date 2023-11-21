@@ -11,17 +11,47 @@ import ProductDetailsPage from './components/product-details-page/ProductDetails
 import CheckOutPage from './components/checkout-page/CheckOutPage'
 
 const initialCart = JSON.parse(localStorage.getItem('cart') || '[]');
+const initialCartSize = JSON.parse(localStorage.getItem('cartSize') || '0');
 function App() {
   const [cart, setCart] = useState(initialCart);
+  const [cartSize, setCartSize] = useState(initialCartSize);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart))
   }, [cart])
 
-  const addCartItems = (items) => setCart(state => [...state, items]);
+
+  useEffect(() => {
+    localStorage.setItem('cartSize', JSON.stringify(cartSize))
+  }, [cartSize])
+
+
+  const addCartItems = (item) => {
+
+    setCart(cart => {
+      const existingItemIndex = cart.findIndex(cartItem => cartItem._id === item._id);
+
+      if (existingItemIndex !== -1) {
+        console.log('ITEMQUANTITY'+item.orderQuantity)
+        const newCart = [...cart];
+        console.log('EXISTINGQUANTITY'+newCart[existingItemIndex].orderQuantity)
+        newCart[existingItemIndex].orderQuantity = Number(item.orderQuantity) + Number(newCart[existingItemIndex].orderQuantity);
+        return newCart;
+      } else {
+        return [...cart, item];
+      }
+    })
+  };
+
+  const updateCartSize = (item) => {
+    setCartSize(oldSize => oldSize + Number(item.orderQuantity));
+  }
+
   const cartContext = {
     cart,
-    addCartItems
+    cartSize,
+    addCartItems,
+    updateCartSize
   }
 
   return (
