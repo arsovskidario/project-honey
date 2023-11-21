@@ -20,10 +20,10 @@ export default function CheckoutItem({
             <h1>Quantity: {orderQuantity}</h1>
         </div>
 
-        <div id="product-subtotal" className="p-2 w-1/4 flex">
+        <div id="product-subtotal" className="p-2 w-1/4 flex md:flex-row flex-col">
             <h1>Subtotal: <span className="font-bold">${(price * orderQuantity).toFixed(2)}</span> </h1>
             <button onClick={clearItem}
-                className="ml-10 p-4 rounded-lg text-white bg-cfb491 hover:bg-btnHover font-medium text-sm text-center">
+                className="md:ml-10 p-4 rounded-lg text-white bg-cfb491 hover:bg-btnHover font-medium text-sm text-center">
                 Delete
             </button>
         </div>
