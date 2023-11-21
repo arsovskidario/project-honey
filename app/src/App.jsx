@@ -32,9 +32,7 @@ function App() {
       const existingItemIndex = cart.findIndex(cartItem => cartItem._id === item._id);
 
       if (existingItemIndex !== -1) {
-        console.log('ITEMQUANTITY'+item.orderQuantity)
         const newCart = [...cart];
-        console.log('EXISTINGQUANTITY'+newCart[existingItemIndex].orderQuantity)
         newCart[existingItemIndex].orderQuantity = Number(item.orderQuantity) + Number(newCart[existingItemIndex].orderQuantity);
         return newCart;
       } else {
@@ -47,11 +45,19 @@ function App() {
     setCartSize(oldSize => oldSize + Number(item.orderQuantity));
   }
 
+  const clearCart = () => {
+    localStorage.clear();
+    setCart(state => []);
+    setCartSize(0);
+  }
+
+
   const cartContext = {
     cart,
     cartSize,
     addCartItems,
-    updateCartSize
+    updateCartSize,
+    clearCart
   }
 
   return (
