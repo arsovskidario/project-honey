@@ -40,7 +40,9 @@ export default function ProductCard({
                 </div>
                 <div className="flex flex-col items-center justify-between">
                     <span className="text-3xl font-bold text-gray-900">${price}</span>
-                    <button className="text-white bg-cfb491 hover:bg-btnHover font-medium rounded-lg text-sm px-5 py-2.5 text-center overflow-clip">Add to cart</button>
+                    <Link to={`product-details/${_id}`}>
+                        <button className="text-white bg-cfb491 hover:bg-btnHover font-medium rounded-lg text-sm px-5 py-2.5 text-center overflow-clip">Buy now</button>
+                    </Link>
                 </div>
             </div>
         </div>

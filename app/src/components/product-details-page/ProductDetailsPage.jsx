@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import ProductDetails from "../product/details/ProductDetails";
+import ProductDetails from "./details/ProductDetails";
 import ProductReviews from "./reviews/ProductReviews";
 
 export default function ProductDetailsPage() {

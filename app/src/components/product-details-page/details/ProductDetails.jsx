@@ -48,10 +48,11 @@ export default function ProductDetails({
                             </svg>
                             <span className="text-starsBrown text-xs font-semibold px-2.5 py-0.5 roundedms-3 overflow-clip">{currentProduct.rating}</span>
                         </div>
+                        <span className="mt-4 font-bold">${currentProduct.price}</span>
                     </div>
                     <p>{currentProduct.description}</p>
                 </div>
-               <Buy/>
+               <Buy item={currentProduct}/>
             </div>
         </section>
     );
