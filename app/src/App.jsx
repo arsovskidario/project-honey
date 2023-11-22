@@ -9,6 +9,9 @@ import MainPage from './components/main-page/MainPage'
 import HoneyPage from './components/honey-page/HoneyPage'
 import ProductDetailsPage from './components/product-details-page/ProductDetailsPage'
 import CheckOutPage from './components/checkout-page/CheckOutPage'
+import LoginPage from './components/user-page/LoginPage'
+import PollenPage from './components/pollen-page/PollenPage'
+import GiftPage from './components/gift-page/GiftPage'
 
 const initialCart = JSON.parse(localStorage.getItem('cart') || '[]');
 const initialCartSize = JSON.parse(localStorage.getItem('cartSize') || '0');
@@ -50,7 +53,6 @@ function App() {
   }
 
   const clearCart = () => {
-    localStorage.clear();
     setCart(state => []);
     setCartSize(0);
   }
@@ -70,8 +72,11 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/honey" element={<HoneyPage />} />
+        <Route path="/pollen" element={<PollenPage />} />
+        <Route path="/gifts" element={<GiftPage />} />
         <Route path="/product-details/:productId" element={<ProductDetailsPage />} />
         <Route path="/checkout" element={<CheckOutPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
 
       <Footer />

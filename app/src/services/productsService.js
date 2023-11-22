@@ -1,7 +1,16 @@
-const baseUrl = "http://localhost:3030/jsonstore/"
+const baseUrl = "http://localhost:3030/data"
 
-export async function getAllProducts() {
-    const response = await fetch(`${baseUrl}/featured`);
+export async function getFeaturedProducts() {
+    const response = await fetch(`${baseUrl}/products?sortBy=createdOn%20desc`);
+    if (!response.ok) {
+        throw new Error('Service is unavaibable');
+    }
+    
+    return response.json();
+}
+
+export async function getProductsPageInfo(page) {
+    const response = await fetch(`${baseUrl}/products?where=category%3D%22${page}%22`);
     if (!response.ok) {
         throw new Error('Service is unavaibable');
     }
@@ -10,7 +19,7 @@ export async function getAllProducts() {
 }
 
 export async function getProductInfo(_id) {
-    const url = `${baseUrl}/featured/${_id}`;
+    const url = `${baseUrl}/products/${_id}`;
     const response = await fetch(url);
     if (!response.ok) {
         throw new Error('Service is unavaibable');

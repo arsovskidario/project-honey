@@ -55,7 +55,7 @@ export default function CheckOutPage() {
 
         {cartSize !== 0 &&
             <section id="order-preference" className="mt-10 ml-4 mr-4">
-                <label for="message" className="block mb-2 text-xl font-medium text-gray-90">Order preference</label>
+                <label htmlFor="message" className="block mb-2 text-xl font-medium text-gray-90">Order preference</label>
                 <textarea id="message"
                     rows="4"
                     className="block p-2.5 w-full text-sm bg-productWhite rounded-lg border border-gray-300 "

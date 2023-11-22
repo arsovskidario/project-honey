@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom"
+
 export default function CheckoutItem({
+    _id,
     imgUrl,
     name,
     price,
@@ -8,7 +11,9 @@ export default function CheckoutItem({
 
     return <div className="flex justify-between items-center">
         <div id="product-img" className="p-2 w-1/4">
-            <img src={imgUrl} alt="product-image" />
+            <Link to={`/product-details/${_id}`}>
+                <img src={imgUrl} alt="product-image" />
+            </Link>
         </div>
 
         <div id="product-info" className="p-2 w-1/4">
