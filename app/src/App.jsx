@@ -9,9 +9,10 @@ import MainPage from './components/main-page/MainPage'
 import HoneyPage from './components/honey-page/HoneyPage'
 import ProductDetailsPage from './components/product-details-page/ProductDetailsPage'
 import CheckOutPage from './components/checkout-page/CheckOutPage'
-import LoginPage from './components/user-page/LoginPage'
+import LoginPage from './components/user-panel/LoginPage'
 import PollenPage from './components/pollen-page/PollenPage'
 import GiftPage from './components/gift-page/GiftPage'
+import RegisterPage from './components/user-panel/RegisterPage'
 
 const initialCart = JSON.parse(localStorage.getItem('cart') || '[]');
 const initialCartSize = JSON.parse(localStorage.getItem('cartSize') || '0');
@@ -77,6 +78,7 @@ function App() {
         <Route path="/product-details/:productId" element={<ProductDetailsPage />} />
         <Route path="/checkout" element={<CheckOutPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
 
       <Footer />

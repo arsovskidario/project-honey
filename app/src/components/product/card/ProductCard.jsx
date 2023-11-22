@@ -10,12 +10,12 @@ export default function ProductCard({
     return (
         <div className="p-8 md:flex md:justify-center md:items-center overflow-hidden bg-productWhite border border-gray-200 rounded-lg shadow">
 
-            <Link to={`product-details/${_id}`}>
+            <Link to={`/product-details/${_id}`}>
                 <img className="rounded-t-lg" src={imgUrl} alt={`${name} image`} />
             </Link>
 
             <div className="px-5 pb-5">
-                <Link to={`product-details/${_id}`}>
+                <Link to={`/product-details/${_id}`}>
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900">{name}</h5>
                 </Link>
                 <div className="flex items-center mt-2.5 mb-5">
@@ -40,7 +40,7 @@ export default function ProductCard({
                 </div>
                 <div className="flex flex-col items-center justify-between">
                     <span className="text-3xl font-bold text-gray-900">${price}</span>
-                    <Link to={`product-details/${_id}`}>
+                    <Link to={`/product-details/${_id}`}>
                         <button className="text-white bg-cfb491 hover:bg-btnHover font-medium rounded-lg text-sm px-5 py-2.5 text-center overflow-clip">Buy now</button>
                     </Link>
                 </div>
