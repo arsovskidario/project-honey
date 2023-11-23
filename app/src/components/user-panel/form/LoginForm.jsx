@@ -1,15 +1,17 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import useForm from "../../../hooks/useForm";
 import { loginUser } from "../../../services/authService";
+import AuthContext from "../../../contexts/AuthContext";
 
 const initalLoginDetails = {
     email: "",
     password: ""
 }
 export default function LoginForm() {
+    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const loginUserHandler = (e) => {
@@ -26,9 +28,7 @@ export default function LoginForm() {
             .then(
                 data => {
                     console.log(data);
-                    localStorage.setItem('accessToken', data.accessToken);
-                    localStorage.setItem('username', data.username)
-                    navigate('/');
+                    login(data.username, data.accessToken);
                 }
             )
             .catch(error => {

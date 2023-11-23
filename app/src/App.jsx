@@ -13,6 +13,7 @@ import LoginPage from './components/user-panel/LoginPage'
 import PollenPage from './components/pollen-page/PollenPage'
 import GiftPage from './components/gift-page/GiftPage'
 import RegisterPage from './components/user-panel/RegisterPage'
+import { AuthProvider } from './contexts/AuthContext'
 
 const initialCart = JSON.parse(localStorage.getItem('cart') || '[]');
 const initialCartSize = JSON.parse(localStorage.getItem('cartSize') || '0');
@@ -22,9 +23,9 @@ function App() {
 
   useEffect(() => {
     setCartSize(oldSize => {
-      return cart.reduce( 
+      return cart.reduce(
         (accumulate, cartItem) => accumulate + Number(cartItem.orderQuantity),
-         0)
+        0)
     });
     localStorage.setItem('cart', JSON.stringify(cart))
     localStorage.setItem('cartSize', JSON.stringify(cartSize))
@@ -48,8 +49,8 @@ function App() {
 
   const clearItem = (item) => {
 
-    setCart (oldCart => 
-      oldCart.filter( cartItem => cartItem._id != item._id)
+    setCart(oldCart =>
+      oldCart.filter(cartItem => cartItem._id != item._id)
     )
   }
 
@@ -68,21 +69,23 @@ function App() {
   }
 
   return (
-    <ShoppingCartContext.Provider value={cartContext}>
-      <Header />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/honey" element={<HoneyPage />} />
-        <Route path="/pollen" element={<PollenPage />} />
-        <Route path="/gifts" element={<GiftPage />} />
-        <Route path="/product-details/:productId" element={<ProductDetailsPage />} />
-        <Route path="/checkout" element={<CheckOutPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Routes>
+    <AuthProvider>
+      <ShoppingCartContext.Provider value={cartContext}>
+        <Header />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/honey" element={<HoneyPage />} />
+          <Route path="/pollen" element={<PollenPage />} />
+          <Route path="/gifts" element={<GiftPage />} />
+          <Route path="/product-details/:productId" element={<ProductDetailsPage />} />
+          <Route path="/checkout" element={<CheckOutPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Routes>
 
-      <Footer />
-    </ShoppingCartContext.Provider>
+        <Footer />
+      </ShoppingCartContext.Provider>
+    </AuthProvider>
   )
 }
 

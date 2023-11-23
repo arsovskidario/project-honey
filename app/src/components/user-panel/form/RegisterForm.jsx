@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+
+import AuthContext from "../../../contexts/AuthContext";
 import useForm from "../../../hooks/useForm";
 import { registerUser } from "../../../services/authService";
-import { useNavigate } from "react-router-dom";
 
 const initialUserDetails = {
     email: '',
@@ -16,7 +17,8 @@ const initialUserDetails = {
 
 }
 export default function RegisterForm() {
-    const navigate = useNavigate();
+
+    const {login} = useContext(AuthContext);
 
     const [errors, setErrors] = useState('');
 
@@ -30,13 +32,9 @@ export default function RegisterForm() {
         console.log(`Sending ` + formState);
         registerUser(formState).then(
             data => {
-                localStorage.setItem('accessToken', data.accessToken);
-                localStorage.setItem('username', extractUsernameFromEmail(data.email));
-                navigate('/');
+                login(extractUsernameFromEmail(data.email), data.accessToken)
             }
         );
-
-        console.log(token);
 
     }
     const { formState, changeHandler, onSubmit } = useForm(initialUserDetails, registerUserHandler);

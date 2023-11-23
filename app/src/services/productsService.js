@@ -29,10 +29,21 @@ export async function getProductInfo(_id) {
 }
 
 export async function getProductReview(_id) {
-    const url = `${baseUrl}/reviews/${_id}`;
+    const url = `${baseUrl}/reviews?where=productId%3D%22${_id}%22`;
     const response = await fetch(url);
     if (!response.ok) {
-        throw new Error('Service is unavaibable');
+        throw new Error(response.status);
+    }
+    
+    return response.json();
+}
+
+
+export async function createProductReview(_id) {
+    const url = `${baseUrl}/reviews?where=productId%3D%22${_id}%22`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(response.status);
     }
     
     return response.json();

@@ -1,11 +1,16 @@
 import { useContext, useEffect, useState } from "react"
+
 import { ShoppingCartContext } from "../../contexts/ShoppingCartContext"
+import AuthContext from "../../contexts/AuthContext";
+
 import CheckoutItem from "./CheckoutItem";
 
 const INITIAL_ORDER_MESSAGE = "";
 export default function CheckOutPage() {
     const [errors, setErrors] = useState('');
+
     const { cart, cartSize, clearCart, clearItem } = useContext(ShoppingCartContext);
+    const { username } = useContext(AuthContext);
 
     const [totalPrice, setTotalPrice] = useState(0);
     const [orderMessage, setOrderMessage] = useState(INITIAL_ORDER_MESSAGE)
@@ -18,7 +23,7 @@ export default function CheckOutPage() {
     }, [cart])
 
     function cartCheckoutHandler() {
-        if (localStorage.getItem('accessToken') === null) {
+        if (!username || username.trim() === '') {
             setErrors('You must be logged in to checkout');
             return;
         }
