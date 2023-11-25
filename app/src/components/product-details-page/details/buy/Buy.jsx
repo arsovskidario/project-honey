@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import { ShoppingCartContext } from "../../../../contexts/ShoppingCartContext";
+
+import ShoppingCartContext  from "../../../../contexts/ShoppingCartContext";
 
 export default function Buy({
     item

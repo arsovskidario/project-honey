@@ -3,8 +3,10 @@ import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import useForm from "../../../hooks/useForm";
-import { loginUser } from "../../../services/authService";
 import AuthContext from "../../../contexts/AuthContext";
+
+import { loginUser } from "../../../services/authService";
+import { extractUsernameFromEmail } from "../../../util/emailUtil";
 
 const initalLoginDetails = {
     email: "",
@@ -27,8 +29,7 @@ export default function LoginForm() {
         })
             .then(
                 data => {
-                    console.log(data);
-                    login(data.username, data.accessToken);
+                    login(extractUsernameFromEmail(data.email), data.accessToken);
                 }
             )
             .catch(error => {

@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import './Header.css';
 
 import PageNavigation from "./page-navigation/PageNavigation";
-import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
+import ShoppingCartContext from "../../contexts/ShoppingCartContext";
 
 export default function Header() {
     const [isDropDownToggled, setIsDropDownToggled] = useState('hidden');

@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import AuthContext from "../../../contexts/AuthContext";
 import useForm from "../../../hooks/useForm";
 import { registerUser } from "../../../services/authService";
+import { extractUsernameFromEmail } from "../../../util/emailUtil";
 
 const initialUserDetails = {
     email: '',
@@ -17,27 +18,21 @@ const initialUserDetails = {
 
 }
 export default function RegisterForm() {
-
-    const {login} = useContext(AuthContext);
-
-    const [errors, setErrors] = useState('');
-
-    const extractUsernameFromEmail = (email) => {
-        const regex = /^([^\s@]+)@/;
-        const match = email.match(regex);
-        return match[1];
-    }
-
     const registerUserHandler = () => {
         console.log(`Sending ` + formState);
         registerUser(formState).then(
             data => {
+                console.log("Register data " + data.email);
                 login(extractUsernameFromEmail(data.email), data.accessToken)
             }
         );
 
     }
+
     const { formState, changeHandler, onSubmit } = useForm(initialUserDetails, registerUserHandler);
+    const [errors, setErrors] = useState('');
+
+    const {login} = useContext(AuthContext);
 
     const validateEmailHandler = () => {
 

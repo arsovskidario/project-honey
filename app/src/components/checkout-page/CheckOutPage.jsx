@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 
-import { ShoppingCartContext } from "../../contexts/ShoppingCartContext"
+import ShoppingCartContext  from "../../contexts/ShoppingCartContext"
 import AuthContext from "../../contexts/AuthContext";
 
 import CheckoutItem from "./CheckoutItem";
