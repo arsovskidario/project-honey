@@ -12,9 +12,6 @@ export default function PollenPage() {
                 bannerName={'Pollen'}
             />
             
-            <h1 className="text-white text-6xl main-page-header mt-10">Pollen</h1>
-
-
           <ProductList productName='pollen'/>
 
         </main>
