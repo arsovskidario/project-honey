@@ -1,28 +1,47 @@
-import { useEffect, useState } from "react";
-import { getProductReview } from "../../../services/productsService";
+import { useContext, useEffect, useState } from "react";
+import { createProductReview, getProductReview } from "../../../services/productsService";
 import { useNavigate } from "react-router-dom";
 import useForm from "../../../hooks/useForm";
 
+import AuthContext from "../../../contexts/AuthContext";
 
 
 const initialFormState = {
-    rating : 5,
-    review: ''
+    rating: 5,
+    review: ""
 }
 
 export default function ProductReviews({
     _id
 }) {
     const navigate = useNavigate();
+    const { username, accessToken } = useContext(AuthContext)
+
     const [reviews, setReviews] = useState([]);
 
-    //TODO: Extract auth context to provider and fetch username from here
     const submitReview = () => {
         console.log('submit');
-       // console.log({...formState,
-       //     productId:{_id},
-       //     userName: ''})
-        
+        if (username && username.trim() !== '') {
+            const review = {
+                userName: username,
+                rating: formState.rating,
+                comment: formState.review,
+                productId: _id
+            }
+            console.log(`Review ${JSON.stringify(review)}`);
+
+            createProductReview(review, accessToken).then((data) => {
+                console.log(data);
+                setReviews(oldReviews => [...oldReviews, data]);
+                resetForm();
+            }
+            )
+
+        } else {
+            //TODO: add error validatiion for not logged in to add review
+            console.log("must be logged in to review")
+        }
+
     }
 
     const { formState, changeHandler, onSubmit, resetForm } = useForm(initialFormState, submitReview);
@@ -52,7 +71,7 @@ export default function ProductReviews({
             <h1 className="ml-6 mb-2">Product reviews</h1>
             <div id="reviews" className="flex flex-col justify-start pb-5 ml-10 border-4 border-white">
                 {reviews.map(review => {
-                    return <div key={review.userId} className="flex flex-row mt-6">
+                    return <div key={review._id} className="flex flex-row mt-6">
                         <div className="ml-6 mt-1">
                             <h2>{review.userName}</h2>
                             <div className="flex items-center space-x-1 rtl:space-x-reverse">
@@ -85,19 +104,21 @@ export default function ProductReviews({
 
             <div id="add-review">
                 <form id="order-preference"
-                className="mt-10 ml-4 mr-4"
-                onSubmit={onSubmit}>
-                    <div  id="rating" className="flex">
-                    <label htmlFor="countries" className="m-1 block mb-2 text-sm font-medium text-starsBrown">Rating:</label>
-                    <select id="countries"
-                        value={formState.rating}
-                        onChange={changeHandler}
-                        className="m-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
-                        {options}
-                    </select>
+                    className="mt-10 ml-4 mr-4"
+                    onSubmit={onSubmit}>
+                    <div id="rating" className="flex">
+                        <label htmlFor="countries" className="m-1 block mb-2 text-sm font-medium text-starsBrown">Rating:</label>
+                        <select id="rating"
+                            name="rating"
+                            value={formState.rating}
+                            onChange={changeHandler}
+                            className="m-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
+                            {options}
+                        </select>
                     </div>
 
-                    <textarea id="message"
+                    <textarea id="review"
+                        name="review"
                         rows="4"
                         className="block p-2.5 w-full text-sm bg-productWhite rounded-lg border border-gray-300 "
                         placeholder="Leave a review here..."

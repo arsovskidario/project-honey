@@ -39,9 +39,17 @@ export async function getProductReview(_id) {
 }
 
 
-export async function createProductReview(_id) {
-    const url = `${baseUrl}/reviews?where=productId%3D%22${_id}%22`;
-    const response = await fetch(url);
+export async function createProductReview(data, token) {
+    const url = `${baseUrl}/reviews`;
+    const response = await fetch(url,{
+        method:'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "X-Authorization": token
+        },
+        body: JSON.stringify(data)
+    })
+    
     if (!response.ok) {
         throw new Error(response.status);
     }
