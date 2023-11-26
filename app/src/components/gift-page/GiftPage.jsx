@@ -1,16 +1,16 @@
 import Banner from "../banner/Banner";
 import ProductList from "../product/list/ProductList";
 
-export default function HoneyPage() {
+export default function GiftPage() {
 
     return (
         <main>
             <Banner
                 bannerUrl={'/src/assets/honey-comb.png'}
-                bannerName={'Raw Honey'}
+                bannerName={'Gifts'}
             />
 
-          <ProductList productName='honey'/>
+          <ProductList productName='gifts'/>
 
         </main>
     );

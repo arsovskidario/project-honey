@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import ProductCard from "../../product/card/ProductCard";
-import { getAllProducts } from "../../../services/productsService";
+import { getFeaturedProducts } from "../../../services/productsService";
 
 export default function FeaturedProdcuts() {
     const navigate = useNavigate();
     const [featuredProducts, setFeaturedProducts] = useState([]);
 
     useEffect(() => {
-        getAllProducts().then(
+        getFeaturedProducts().then(
             data => {
-                setFeaturedProducts(Object.values(data));
+                setFeaturedProducts(Object.values(data).slice(0, 3));
 
             }
         ).catch(error =>

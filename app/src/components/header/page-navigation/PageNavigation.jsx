@@ -18,7 +18,7 @@ export default function PageNavigation({
                 <Link to="gifts" className="list-item">Gifts</Link>
             </li>
             {isDropDownToggled && (<li>
-                <Link to="#" className="list-item">User</Link>
+                <Link to="login" className="list-item">User Panel</Link>
             </li>)}
         </ul>
     )
