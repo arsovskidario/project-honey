@@ -29,40 +29,44 @@ function isNumeric(value) {
 export const validateFields = (fields) => {
     const errors = {};
 
-    if (!isEmailValid(fields['email'])) {
+    if ('email' in fields && !isEmailValid(fields['email'])) {
         errors['email'] = 'Provided email is not valid!';
     }
 
 
-    if (!isPasswordValidFormat(fields['password'])) {
+    if ('password' in fields && !isPasswordValidFormat(fields['password'])) {
         errors['password'] = 'Please enter a password with min 8 letter, with at least a symbol[~`!@#$%^&*()-_+={}[]|\;:"<>,./?], upper and lower case letters and a number!';
     }
 
 
-    if (!isPasswordConfirmationCorrect(fields['password'], fields['passwordConfirmation'])) {
+    if ('passwordConfirmation' in fields && !isPasswordConfirmationCorrect(fields['password'], fields['passwordConfirmation'])) {
         errors['passwordConfirmation'] = "Passwords don't match!";
     }
 
 
-    if (isEmptyOrNull(fields['firstName'])) {
+    if ('firstName' in fields && isEmptyOrNull(fields['firstName'])) {
         errors['firstName'] = 'Please enter your first name in order to continue!';
     }
 
-    if (isEmptyOrNull(fields['lastName'])) {
+    if ('lastName' in fields && isEmptyOrNull(fields['lastName'])) {
         errors['lastName'] = 'Please enter your last name in order to continue!';
     }
 
 
-    if (isEmptyOrNull(fields['address'])) {
+    if ('address' in fields && isEmptyOrNull(fields['address'])) {
         errors['address'] = 'Please enter your address in order to continue!';
     }
 
-    if (isEmptyOrNull(fields['city'])) {
+    if ('city' in fields && isEmptyOrNull(fields['city'])) {
         errors['city'] = 'Please enter your city in order to continue!';
     }
 
-    if(!isNumeric(fields['phoneNumber'])) {
+    if ('phoneNumber' in fields && !isNumeric(fields['phoneNumber'])) {
         errors['phoneNumber'] = 'Please enter a valid phone number!';
+    }
+
+    if ('loginPassword' in fields && isEmptyOrNull(fields['loginPassword'])) {
+        errors['loginPassword'] = 'Please enter your password!';
     }
 
     return errors;

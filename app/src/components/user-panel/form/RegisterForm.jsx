@@ -8,7 +8,7 @@ import { registerUser } from "../../../services/authService";
 import { extractUsernameFromEmail } from "../../../util/emailUtil";
 import { hasErrorInput, hasErrors, validateFields } from "../../../util/validationUtil";
 
-import './RegisterForm.css';
+import './Form.css';
 
 const initialUserDetails = {
     email: '',
@@ -27,15 +27,23 @@ export default function RegisterForm() {
     const registerUserHandler = () => {
         const validationErrors = validateFields(formState);
         addValidationErrors(validationErrors);
-        
+
         if (!hasErrors(validationErrors)) {
             console.log(`Sending ` + formState);
-            registerUser(formState).then(
+            registerUser(formState)
+            .then(
                 data => {
                     console.log("Register data " + data.email);
                     login(extractUsernameFromEmail(data.email), data.accessToken)
                 }
-            );
+            )
+            .catch(error => {
+                if (error.message === "409") {
+                    addValidationErrors({ 'credentials': 'User is already registered!' })
+                } else {
+                    navigate(`/error?message=${error.message}`)
+                }
+            });
         }
 
     }
@@ -229,6 +237,13 @@ export default function RegisterForm() {
 
                         </div>
 
+                        {hasErrorInput(errors, 'credentials') &&
+                            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                                <span className="block sm:inline">{errors.credentials}</span>
+                            </div>
+
+                        }
+                        
                         <button
                             type="submit"
                             className="w-full text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-5 py-2.5 text-center overflow-clip"
