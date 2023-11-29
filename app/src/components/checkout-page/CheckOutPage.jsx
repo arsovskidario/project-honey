@@ -4,14 +4,19 @@ import ShoppingCartContext from "../../contexts/ShoppingCartContext"
 import AuthContext from "../../contexts/AuthContext";
 
 import CheckoutItem from "./CheckoutItem";
+import { createOrder } from "../../services/orderService";
+import { useNavigate } from "react-router-dom";
+import { ERROR_CODE } from "../constants/constants";
 
 const INITIAL_ORDER_MESSAGE = "";
 export default function CheckOutPage() {
+    const navigate = useNavigate();
+
     const [errors, setErrors] = useState('');
     const [succPurchase, setSuccPurchase] = useState('');
 
     const { cart, cartSize, clearCart, clearItem } = useContext(ShoppingCartContext);
-    const { username } = useContext(AuthContext);
+    const { username, accessToken } = useContext(AuthContext);
 
     const [totalPrice, setTotalPrice] = useState(0);
     const [orderMessage, setOrderMessage] = useState(INITIAL_ORDER_MESSAGE)
@@ -27,7 +32,7 @@ export default function CheckOutPage() {
         setSuccPurchase('')
         , [errors])
 
-    function cartCheckoutHandler() {
+    async function cartCheckoutHandler() {
         if (!username || username.trim() === '') {
             setErrors('You must be logged in to checkout');
             return;
@@ -38,9 +43,17 @@ export default function CheckOutPage() {
             return;
         }
 
-        console.log("sending entire cart to BE");
-        console.log("order preference", orderMessage)
-        console.log({ cart, orderMessage });
+        const items = cart.map(({ _id, name, orderQuantity, price }) => ({ _id, name, orderQuantity, price }));
+        const order = { username, items, orderMessage, totalPrice };
+        console.log('Sending order: ' + JSON.stringify(order));
+
+        try {
+            const response = await createOrder(order, accessToken);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+            navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`);
+        }
 
         setSuccPurchase("Order complete!")
         clearCart();
