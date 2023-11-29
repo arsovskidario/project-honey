@@ -23,10 +23,11 @@ const initialUserDetails = {
 
 }
 export default function RegisterForm() {
-    const [errors, setErrors] = useState({});
 
     const registerUserHandler = () => {
         const validationErrors = validateFields(formState);
+        addValidationErrors(validationErrors);
+        
         if (!hasErrors(validationErrors)) {
             console.log(`Sending ` + formState);
             registerUser(formState).then(
@@ -37,11 +38,9 @@ export default function RegisterForm() {
             );
         }
 
-        setErrors(oldErrors => validationErrors);
-
     }
 
-    const { formState, changeHandler, onSubmit } = useForm(initialUserDetails, registerUserHandler);
+    const { formState, changeHandler, onSubmit, errors, addValidationErrors } = useForm(initialUserDetails, registerUserHandler);
 
     const { login } = useContext(AuthContext);
 
