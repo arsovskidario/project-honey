@@ -1,17 +1,23 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { ERROR_CODE } from "../constants/constants";
 
-export default function ErrorPage({
-    imgUrl
-}) {
+const SERVICE_UNAVAILABLE_ICON_PATH = "/src/assets/505-icon.png";
+const NOT_FOUND_ICON_PATH = "/src/assets/404-icon.png"
+
+export default function ErrorPage() {
     const navigate = useNavigate();
     const location = useLocation();
-    const params = new URLSearchParams(location.search);
 
+    const params = new URLSearchParams(location.search);
+    console.log(ERROR_CODE.SERVICE_UNAVAILABLE)
     console.log(params.get('message'));
     return <section className="flex flex-col items-center h-screen">
         <img
-        className="mt-20"
-            src={imgUrl}
+            className="mt-20"
+            src={ERROR_CODE.NOT_FOUND === params.get('message')
+                ? NOT_FOUND_ICON_PATH
+                : SERVICE_UNAVAILABLE_ICON_PATH
+            }
             alt="error-bee-icon" />
 
         <button

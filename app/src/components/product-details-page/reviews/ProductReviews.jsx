@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { createProductReview, getProductReview } from "../../../services/productsService";
 import { useNavigate } from "react-router-dom";
+
 import useForm from "../../../hooks/useForm";
+
+import { createProductReview, getProductReview } from "../../../services/productsService";
+import { ERROR_CODE } from "../../constants/constants";
 
 import AuthContext from "../../../contexts/AuthContext";
 
@@ -53,7 +56,7 @@ export default function ProductReviews({
             }
         ).catch(error => {
             if (error.message !== '404') {
-                navigate(`/error?message=${error.message}`)
+                navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`)
             }
         }
         )

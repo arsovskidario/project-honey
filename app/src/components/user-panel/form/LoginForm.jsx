@@ -9,6 +9,7 @@ import { loginUser } from "../../../services/authService";
 
 import { extractUsernameFromEmail } from "../../../util/emailUtil";
 import { hasErrorInput, hasErrors, validateFields } from "../../../util/validationUtil";
+import { ERROR_CODE } from "../../constants/constants";
 
 import './Form.css';
 
@@ -35,7 +36,7 @@ export default function LoginForm() {
                 if (error.message === "403") {
                     addValidationErrors({ 'credentials': 'Incorrect username or password.' });
                 } else {
-                    navigate(`/error?message=${error.message}`);
+                    navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`);
                 }
             }
         } 

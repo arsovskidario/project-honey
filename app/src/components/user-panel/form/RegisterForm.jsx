@@ -7,6 +7,7 @@ import { registerUser } from "../../../services/authService";
 
 import { extractUsernameFromEmail } from "../../../util/emailUtil";
 import { hasErrorInput, hasErrors, validateFields } from "../../../util/validationUtil";
+import { ERROR_CODE } from "../../constants/constants";
 
 import './Form.css';
 
@@ -36,7 +37,7 @@ export default function RegisterForm() {
                 if (error.message === "409") {
                     addValidationErrors({ 'credentials': 'User is already registered!' });
                 } else {
-                    navigate(`/error?message=${error.message}`);
+                    navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`);
                 }
             }
         }
