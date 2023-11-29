@@ -50,14 +50,15 @@ export default function CheckOutPage() {
         try {
             const response = await createOrder(order, accessToken);
             console.log(response);
+            setSuccPurchase("Order complete!");
+            setOrderMessage(INITIAL_ORDER_MESSAGE);
         } catch (error) {
             console.log(error);
             navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`);
+        } finally{
+            clearCart();
         }
 
-        setSuccPurchase("Order complete!")
-        clearCart();
-        setOrderMessage(INITIAL_ORDER_MESSAGE)
     }
 
     function updateOrderMessageHandler(e) {
