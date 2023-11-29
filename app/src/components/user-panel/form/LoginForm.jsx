@@ -1,5 +1,5 @@
 
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import useForm from "../../../hooks/useForm";
@@ -20,31 +20,25 @@ export default function LoginForm() {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const loginUserHandler = () => {
+    const loginUserHandler = async () => {
         const validationErrors = validateFields(formState);
         addValidationErrors(validationErrors);
-        console.log(validationErrors)
         if (!hasErrors(validationErrors)) {
-
-            loginUser({
-                email: formState.email,
-                password: formState.loginPassword
-            })
-                .then(
-                    data => {
-                        login(extractUsernameFromEmail(data.email), data.accessToken);
-                    }
-                )
-                .catch(error => {
-                    if (error.message === "403") {
-                        addValidationErrors({ 'credentials': 'Incorrect username or password.' })
-                        console.log(error.message)
-                    } else {
-                        navigate(`/error?message=${error.message}`)
-                    }
+            try {
+                const data = await loginUser({
+                    email: formState.email,
+                    password: formState.loginPassword
+                });
+    
+                login(extractUsernameFromEmail(data.email), data.accessToken);
+            } catch (error) {
+                if (error.message === "403") {
+                    addValidationErrors({ 'credentials': 'Incorrect username or password.' });
+                } else {
+                    navigate(`/error?message=${error.message}`);
                 }
-                )
-        }
+            }
+        } 
     }
 
     const { formState, changeHandler, onSubmit, errors, addValidationErrors } = useForm(initalLoginDetails, loginUserHandler);
@@ -79,6 +73,7 @@ export default function LoginForm() {
                                 </div>
                             }
                         </div>
+
                         <div>
                             <label htmlFor="loginPassword" className="block mb-2 text-sm font-medium">Password</label>
                             <input
@@ -100,6 +95,7 @@ export default function LoginForm() {
                                 </div>
                             }
                         </div>
+                        
                         <div className="flex items-center justify-between">
                             <span className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</span>
                         </div>
@@ -115,7 +111,6 @@ export default function LoginForm() {
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                             Don't have an account yet? <Link to='/register' className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</Link>
                         </p>
-
 
                     </form>
                 </div>

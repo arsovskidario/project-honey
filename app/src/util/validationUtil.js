@@ -24,8 +24,6 @@ function isNumeric(value) {
     return /^-?\d+$/.test(value);
 }
 
-
-//TODO: For login if attributes not present skip them
 export const validateFields = (fields) => {
     const errors = {};
 

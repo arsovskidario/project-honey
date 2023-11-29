@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import useForm from "../../../hooks/useForm";
 import AuthContext from "../../../contexts/AuthContext";
@@ -24,26 +24,21 @@ const initialUserDetails = {
 }
 export default function RegisterForm() {
 
-    const registerUserHandler = () => {
+    const registerUserHandler = async () => {
         const validationErrors = validateFields(formState);
         addValidationErrors(validationErrors);
 
         if (!hasErrors(validationErrors)) {
-            console.log(`Sending ` + formState);
-            registerUser(formState)
-            .then(
-                data => {
-                    console.log("Register data " + data.email);
-                    login(extractUsernameFromEmail(data.email), data.accessToken)
-                }
-            )
-            .catch(error => {
+            try {
+                const data = await registerUser(formState);
+                login(extractUsernameFromEmail(data.email), data.accessToken);
+            } catch (error) {
                 if (error.message === "409") {
-                    addValidationErrors({ 'credentials': 'User is already registered!' })
+                    addValidationErrors({ 'credentials': 'User is already registered!' });
                 } else {
-                    navigate(`/error?message=${error.message}`)
+                    navigate(`/error?message=${error.message}`);
                 }
-            });
+            }
         }
 
     }
@@ -83,6 +78,7 @@ export default function RegisterForm() {
                             }
 
                         </div>
+
                         <div>
                             <label htmlFor="password" className="block mb-2 text-sm font-medium">Password</label>
                             <input
@@ -130,7 +126,7 @@ export default function RegisterForm() {
 
                         <div id="personal data">
                             <h1 className="font-bold">Personal information</h1>
-                            <div className="flex">
+                            <div id="name-section" className="flex">
                                 <div>
                                     <label htmlFor="firstName" className="block mb-2 text-sm font-medium">First name</label>
                                     <input
@@ -172,6 +168,7 @@ export default function RegisterForm() {
                                     }
                                 </div>
                             </div>
+
                             <div>
                                 <label htmlFor="phoneNumber" className="block mb-2 text-sm font-medium">Phone number</label>
                                 <input
