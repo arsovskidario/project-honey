@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react"
 
-import ShoppingCartContext from "../../contexts/ShoppingCartContext"
-import AuthContext from "../../contexts/AuthContext";
+import ShoppingCartContext from "../../../contexts/ShoppingCartContext"
+import AuthContext from "../../../contexts/AuthContext";
 
 import CheckoutItem from "./CheckoutItem";
-import { createOrder } from "../../services/orderService";
+import { createOrder } from "../../../services/orderService";
 import { useNavigate } from "react-router-dom";
-import { ERROR_CODE } from "../constants/constants";
+import { ERROR_CODE } from "../../constants/constants";
 
 const INITIAL_ORDER_MESSAGE = "";
 export default function CheckOutPage() {

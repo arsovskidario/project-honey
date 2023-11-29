@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-import { getProductInfo } from "../../../services/productsService";
-import { ERROR_CODE } from "../../constants/constants";
+import { getProductInfo } from "../../../../services/productsService";
+import { ERROR_CODE } from "../../../constants/constants";
 
 import Buy from "./buy/Buy";
 

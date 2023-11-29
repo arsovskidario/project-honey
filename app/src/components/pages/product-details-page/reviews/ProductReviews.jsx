@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import useForm from "../../../hooks/useForm";
+import useForm from "../../../../hooks/useForm";
 
-import { createProductReview, getProductReview } from "../../../services/productsService";
-import { ERROR_CODE } from "../../constants/constants";
+import { createProductReview, getProductReview } from "../../../../services/productsService";
+import { ERROR_CODE } from "../../../constants/constants";
 
-import AuthContext from "../../../contexts/AuthContext";
+import AuthContext from "../../../../contexts/AuthContext";
 
 
 const initialFormState = {

@@ -1,5 +1,5 @@
-import Banner from "../banner/Banner";
-import ProductList from "../product/list/ProductList";
+import Banner from "../../banner/Banner";
+import ProductList from "../../product/list/ProductList";
 
 export default function GiftPage() {
 
