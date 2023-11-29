@@ -31,7 +31,6 @@ export const validateFields = (fields) => {
         errors['email'] = 'Provided email is not valid!';
     }
 
-
     if ('password' in fields && !isPasswordValidFormat(fields['password'])) {
         errors['password'] = 'Please enter a password with min 8 letter, with at least a symbol[~`!@#$%^&*()-_+={}[]|\;:"<>,./?], upper and lower case letters and a number!';
     }

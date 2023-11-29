@@ -13,9 +13,10 @@ import LoginPage from './components/user-panel/LoginPage'
 import PollenPage from './components/pollen-page/PollenPage'
 import GiftPage from './components/gift-page/GiftPage'
 import RegisterPage from './components/user-panel/RegisterPage'
+import ErrorPage from './components/errors/ErrorPage'
 
 function App() {
-  
+
   return (
     <AuthProvider>
       <ShoppingCartProvider>
@@ -29,6 +30,7 @@ function App() {
           <Route path="/checkout" element={<CheckOutPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/error" element={<ErrorPage imgUrl={"/src/assets/505-icon.png"}/>} />
         </Routes>
 
         <Footer />
