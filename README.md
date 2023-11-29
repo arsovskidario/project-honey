@@ -23,6 +23,7 @@
 - [ ] Make pictures responsive in product features
 - [ ] make img for products transparent
 - [ ] change color pallete
+- [ ] Fix username after register
 
 ### Error handling
 - [ ] Error page
