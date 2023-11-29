@@ -24,8 +24,6 @@
 - [ ] make img for products transparent
 - [ ] change color pallete
 - [ ] Fix username after register
-- [ ] Remove shadow from error pages
 
 ### Error handling
-- [ ] Error page
 - [ ] Loading spinner -> mainpage featured productrs, product details page
