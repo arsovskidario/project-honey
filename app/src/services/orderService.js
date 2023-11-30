@@ -27,3 +27,21 @@ export async function getAllOrders() {
     
     return response.json();
 }
+
+
+export async function deleteOrder(_id, adminToken) {
+    const url = `${baseUrl}/orders/${_id}`;
+    const response = await fetch(url,{
+        method:'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "X-Admin": adminToken
+        },
+    });
+    
+    if (!response.ok) {
+        throw new Error(response.status);
+    }
+    
+    return response.json();
+}
