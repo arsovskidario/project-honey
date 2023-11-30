@@ -23,6 +23,7 @@ function App() {
       <AuthProvider>
         <ShoppingCartProvider>
           <Header />
+          
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/honey" element={<HoneyPage />} />

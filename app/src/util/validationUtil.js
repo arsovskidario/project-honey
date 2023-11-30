@@ -1,5 +1,5 @@
 
-function isEmptyOrNull(str) {
+export function isEmptyOrNull(str) {
     return !str || str.trim() === '';
 }
 

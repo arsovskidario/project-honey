@@ -10,6 +10,7 @@ import { hasErrorInput, hasErrors, validateFields } from "../../../util/validati
 import { ERROR_CODE } from "../../constants/constants";
 
 import './Form.css';
+import { useNavigate } from "react-router-dom";
 
 const initialUserDetails = {
     email: '',
@@ -24,6 +25,8 @@ const initialUserDetails = {
 
 }
 export default function RegisterForm() {
+    
+    const navigate = useNavigate();
 
     const registerUserHandler = async () => {
         const validationErrors = validateFields(formState);
