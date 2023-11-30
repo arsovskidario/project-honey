@@ -44,7 +44,7 @@ export default function CheckOutPage() {
         }
 
         const items = cart.map(({ _id, name, orderQuantity, price }) => ({ _id, name, orderQuantity, price }));
-        const order = { username, items, orderMessage, totalPrice };
+        const order = { username, items, orderMessage, totalPrice: totalPrice.toFixed(2) };
         console.log('Sending order: ' + JSON.stringify(order));
 
         try {
