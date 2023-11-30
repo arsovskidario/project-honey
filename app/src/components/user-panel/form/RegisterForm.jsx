@@ -3,7 +3,7 @@ import { useContext } from "react";
 import useForm from "../../../hooks/useForm";
 import AuthContext from "../../../contexts/AuthContext";
 
-import { registerUser } from "../../../services/authService";
+import { registerUser, createUserDetails} from "../../../services/authService";
 
 import { extractUsernameFromEmail } from "../../../util/emailUtil";
 import { hasErrorInput, hasErrors, validateFields } from "../../../util/validationUtil";
@@ -21,11 +21,11 @@ const initialUserDetails = {
     phoneNumber: '',
     address: '',
     city: '',
-    country: ''
+    country: 'Macedonia'
 
 }
 export default function RegisterForm() {
-    
+
     const navigate = useNavigate();
 
     const registerUserHandler = async () => {
@@ -35,8 +35,24 @@ export default function RegisterForm() {
         if (!hasErrors(validationErrors)) {
             try {
                 const data = await registerUser(formState);
-                login(extractUsernameFromEmail(data.email), data.accessToken);
+                const username = extractUsernameFromEmail(data.email);
+
+                const userDetails = {
+                    username,
+                    fullName: `${formState.firstName} ${formState.lastName}`,
+                    phoneNumber: formState.phoneNumber,
+                    address: formState.address,
+                    country: `${formState.city}, ${formState.country}`
+                }
+
+                console.log('User details: ' + JSON.stringify(userDetails))
+
+               const response = await createUserDetails(userDetails, data.accessToken)
+               console.log(response);
+                
+                login(username, data.accessToken);
             } catch (error) {
+                console.log(error);
                 if (error.message === "409") {
                     addValidationErrors({ 'credentials': 'User is already registered!' });
                 } else {
@@ -244,7 +260,7 @@ export default function RegisterForm() {
                             </div>
 
                         }
-                        
+
                         <button
                             type="submit"
                             className="w-full text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-5 py-2.5 text-center overflow-clip"

@@ -31,3 +31,31 @@ export async function registerUser(userDetails) {
 
     return response.json();
 }
+
+export async function createUserDetails(userDetails, token) {
+    const url = `http://localhost:3030/data/userDetails`;
+    const response = await fetch(url,{
+        method:'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "X-Authorization": token
+        },
+        body: JSON.stringify(userDetails)
+    })
+    
+    if (!response.ok) {
+        throw new Error(response.status);
+    }
+    
+    return response.json();
+}
+
+export async function getUserDetails() {
+    const url = `http://localhost:3030/data/userDetails`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Service is unavaibable');
+    }
+    
+    return response.json();
+}

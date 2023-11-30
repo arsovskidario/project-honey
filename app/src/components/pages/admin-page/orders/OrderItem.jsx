@@ -20,6 +20,7 @@ export default function OrderItem({
             <h2 className="text-center">{convertTimestampToEUFormat(_createdOn)}</h2>
             <h2>Username: {username}</h2>
             <h2>Fullname: </h2>
+            <h2>Phone number: </h2>
             <h2>Address:</h2>
 
             <div className="border-double border-t-4 border-b-4 border-l-0 border-r-0 border-gray-900 my-3">
