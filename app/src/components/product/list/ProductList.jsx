@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getProductsPageInfo } from "../../../services/productsService";
+import { getAllProducts, getProductsPageInfo } from "../../../services/productsService";
 import { ERROR_CODE } from "../../constants/constants";
 
 import ProductCard from "../card/ProductCard";
@@ -14,13 +14,23 @@ export default function ProductList({
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        getProductsPageInfo(productName).then(
-            data => {
+        const fetchData = async () => {
+            try {
+                let data;
+
+                if (productName === '') {
+                    data = await getAllProducts();
+                } else {
+                    data = await getProductsPageInfo(productName);
+                }
+
                 setProducts(Object.values(data));
+            } catch (error) {
+                navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`);
             }
-        ).catch(error =>
-            navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`)
-        )
+        };
+
+        fetchData();
     }, [])
 
     function capitalizeFirstLetter(string) {
