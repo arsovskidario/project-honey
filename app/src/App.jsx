@@ -19,7 +19,7 @@ import AuthGuard from './AuthGuard'
 import AdminPage from './components/pages/admin-page/AdminPage'
 import { OrderPage } from './components/pages/admin-page/orders/OrderPage'
 import { ProductPage } from './components/pages/admin-page/ProductPage'
-import { UsersPage } from './components/pages/admin-page/UsersPage'
+import { UsersPage } from './components/pages/admin-page/users/UsersPage'
 
 function App() {
 

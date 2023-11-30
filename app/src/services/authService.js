@@ -59,3 +59,13 @@ export async function getUserDetailsByUsername(username) {
     
     return response.json();
 }
+
+export async function getUserDetails() {
+    const url = `http://localhost:3030/data/userDetails`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Service is unavaibable');
+    }
+    
+    return response.json();
+}
