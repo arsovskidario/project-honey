@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { convertTimestampToEUFormat } from "../../../../util/timeUtil";
+import { getUserDetailsByUsername } from "../../../../services/authService";
 
 export default function OrderItem({
     _id,
@@ -9,7 +11,22 @@ export default function OrderItem({
     totalPrice,
     completeOrderHandler
 }) {
-    
+
+    const [userDetails, setUserDetails] = useState({});
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getUserDetailsByUsername(username);
+                setUserDetails(data[0]);
+            } catch (error) {
+                console.log("failed to fetch user details " + error);
+            }
+        }
+
+        fetchData();
+    }, []);
+
     const submitComplete = () => {
         completeOrderHandler(_id);
     }
@@ -19,9 +36,9 @@ export default function OrderItem({
             <h1 className="text-center font-bold">Order ID: #{_id}</h1>
             <h2 className="text-center">{convertTimestampToEUFormat(_createdOn)}</h2>
             <h2>Username: {username}</h2>
-            <h2>Fullname: </h2>
-            <h2>Phone number: </h2>
-            <h2>Address:</h2>
+            <h2>Fullname: {userDetails.fullName}</h2>
+            <h2>Phone number: {userDetails.phoneNumber}</h2>
+            <h2>Address: {userDetails.address}</h2>
 
             <div className="border-double border-t-4 border-b-4 border-l-0 border-r-0 border-gray-900 my-3">
                 <div className="flex text-sm pt-1 px-1">

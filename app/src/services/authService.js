@@ -50,8 +50,8 @@ export async function createUserDetails(userDetails, token) {
     return response.json();
 }
 
-export async function getUserDetails() {
-    const url = `http://localhost:3030/data/userDetails`;
+export async function getUserDetailsByUsername(username) {
+    const url = `http://localhost:3030/data/userDetails?where=username%3D%22${username}%22`;
     const response = await fetch(url);
     if (!response.ok) {
         throw new Error('Service is unavaibable');
