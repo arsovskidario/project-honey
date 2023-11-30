@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import ProductCard from "../../product/card/ProductCard";
-import { getFeaturedProducts } from "../../../services/productsService";
+
+import { getFeaturedProducts } from "../../../../services/productsService";
+import { ERROR_CODE } from "../../../constants/constants";
+import ProductCard from "../../../product/card/ProductCard";
 
 export default function FeaturedProdcuts() {
     const navigate = useNavigate();
@@ -14,7 +16,7 @@ export default function FeaturedProdcuts() {
 
             }
         ).catch(error =>
-            navigate(`/error?message=${error.message}`)
+            navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`)
         )
     }, [])
 

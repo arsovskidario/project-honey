@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { getProductsPageInfo } from "../../../services/productsService";
+import { ERROR_CODE } from "../../constants/constants";
 
 import ProductCard from "../card/ProductCard";
 
@@ -18,7 +19,7 @@ export default function ProductList({
                 setProducts(Object.values(data));
             }
         ).catch(error =>
-            navigate(`/error?message=${error.message}`)
+            navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`)
         )
     }, [])
 

@@ -1,9 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { createProductReview, getProductReview } from "../../../services/productsService";
 import { useNavigate } from "react-router-dom";
-import useForm from "../../../hooks/useForm";
 
-import AuthContext from "../../../contexts/AuthContext";
+import useForm from "../../../../hooks/useForm";
+
+import { createProductReview, getProductReview } from "../../../../services/productsService";
+import { ERROR_CODE } from "../../../constants/constants";
+
+import AuthContext from "../../../../contexts/AuthContext";
+import { isEmptyOrNull } from "../../../../util/validationUtil";
 
 
 const initialFormState = {
@@ -16,12 +20,12 @@ export default function ProductReviews({
 }) {
     const navigate = useNavigate();
     const { username, accessToken } = useContext(AuthContext)
-
+    
+    const [errors, setErrors] = useState('');
     const [reviews, setReviews] = useState([]);
 
     const submitReview = () => {
-        console.log('submit');
-        if (username && username.trim() !== '') {
+        if (!isEmptyOrNull(username)) {
             const review = {
                 userName: username,
                 rating: formState.rating,
@@ -38,8 +42,7 @@ export default function ProductReviews({
             )
 
         } else {
-            //TODO: add error validatiion for not logged in to add review
-            console.log("must be logged in to review")
+            setErrors("Must be logged in to addd a review!");
         }
 
     }
@@ -53,7 +56,7 @@ export default function ProductReviews({
             }
         ).catch(error => {
             if (error.message !== '404') {
-                navigate(`/error?message=${error.message}`)
+                navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`)
             }
         }
         )
@@ -126,6 +129,13 @@ export default function ProductReviews({
                         onChange={changeHandler}
                     >
                     </textarea>
+
+                    {errors.length !== 0 &&
+                        (<div className=" w-1/3 self-center bg-red-100 border border-red-400 text-red-700 px-2 py-1 mt-2 rounded relative" role="alert">
+                            <span className="block sm:inline">{errors}</span>
+                        </div>)
+                    }
+
                     <button
                         className="mt-2 mb-2 p-2 text-white bg-cfb491 hover:bg-btnHover font-medium rounded-lg text-sm text-center overflow-clip">
                         Add review

@@ -1,0 +1,7 @@
+.input-field {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5
+}
+
+.input-error {
+    @apply border border-red-600 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export default function useForm(initialState, submitHandler) {
+    const [errors, setErrors] = useState({});
     const [formState, setFormState] = useState(initialState);
 
     const changeHandler = (e) => {
@@ -19,11 +20,17 @@ export default function useForm(initialState, submitHandler) {
         setFormState(initialState);
     }
 
+    const addValidationErrors = (validationErrors) => {
+        setErrors(oldErrors => validationErrors);
+    }
+
     return {
         formState,
         changeHandler,
         onSubmit,
-        resetForm
+        resetForm,
+        errors,
+        addValidationErrors
     }
 
 }

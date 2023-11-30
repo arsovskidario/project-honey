@@ -1,9 +1,16 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
-import AuthContext from "../../../contexts/AuthContext";
 import useForm from "../../../hooks/useForm";
+import AuthContext from "../../../contexts/AuthContext";
+
 import { registerUser } from "../../../services/authService";
+
 import { extractUsernameFromEmail } from "../../../util/emailUtil";
+import { hasErrorInput, hasErrors, validateFields } from "../../../util/validationUtil";
+import { ERROR_CODE } from "../../constants/constants";
+
+import './Form.css';
+import { useNavigate } from "react-router-dom";
 
 const initialUserDetails = {
     email: '',
@@ -18,25 +25,31 @@ const initialUserDetails = {
 
 }
 export default function RegisterForm() {
-    const registerUserHandler = () => {
-        console.log(`Sending ` + formState);
-        registerUser(formState).then(
-            data => {
-                console.log("Register data " + data.email);
-                login(extractUsernameFromEmail(data.email), data.accessToken)
+    
+    const navigate = useNavigate();
+
+    const registerUserHandler = async () => {
+        const validationErrors = validateFields(formState);
+        addValidationErrors(validationErrors);
+
+        if (!hasErrors(validationErrors)) {
+            try {
+                const data = await registerUser(formState);
+                login(extractUsernameFromEmail(data.email), data.accessToken);
+            } catch (error) {
+                if (error.message === "409") {
+                    addValidationErrors({ 'credentials': 'User is already registered!' });
+                } else {
+                    navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`);
+                }
             }
-        );
+        }
 
     }
 
-    const { formState, changeHandler, onSubmit } = useForm(initialUserDetails, registerUserHandler);
-    const [errors, setErrors] = useState('');
+    const { formState, changeHandler, onSubmit, errors, addValidationErrors } = useForm(initialUserDetails, registerUserHandler);
 
-    const {login} = useContext(AuthContext);
-
-    const validateEmailHandler = () => {
-
-    }
+    const { login } = useContext(AuthContext);
 
     return (
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:mt-20 lg:py-0">
@@ -55,10 +68,21 @@ export default function RegisterForm() {
                                 placeholder="name@email.com"
                                 value={formState.email}
                                 onChange={changeHandler}
-                                onBlur={validateEmailHandler}
-                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                className={
+                                    hasErrorInput(errors, 'email')
+                                        ? 'input-error'
+                                        : 'input-field'
+                                }
                             />
+
+                            {hasErrorInput(errors, 'email') &&
+                                <div className="text-red-700 p-1 rounded relative" role="alert">
+                                    <span className="block sm:inline">{errors.email}</span>
+                                </div>
+                            }
+
                         </div>
+
                         <div>
                             <label htmlFor="password" className="block mb-2 text-sm font-medium">Password</label>
                             <input
@@ -67,8 +91,18 @@ export default function RegisterForm() {
                                 placeholder="••••••••"
                                 value={formState.password}
                                 onChange={changeHandler}
-                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                className={
+                                    hasErrorInput(errors, 'password')
+                                        ? 'input-error'
+                                        : 'input-field'
+                                }
                             />
+                            {hasErrorInput(errors, 'password') &&
+                                <div className="text-red-700 p-1 rounded relative" role="alert">
+                                    <span className="block sm:inline">{errors.password}</span>
+                                </div>
+                            }
+
 
                         </div>
 
@@ -80,13 +114,23 @@ export default function RegisterForm() {
                                 placeholder="••••••••"
                                 value={formState.passwordConfirmation}
                                 onChange={changeHandler}
-                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                className={
+                                    hasErrorInput(errors, 'passwordConfirmation')
+                                        ? 'input-error'
+                                        : 'input-field'
+                                }
                             />
+
+                            {hasErrorInput(errors, 'passwordConfirmation') &&
+                                <div className="text-red-700 p-1 rounded relative" role="alert">
+                                    <span className="block sm:inline">{errors.passwordConfirmation}</span>
+                                </div>
+                            }
                         </div>
 
                         <div id="personal data">
                             <h1 className="font-bold">Personal information</h1>
-                            <div className="flex">
+                            <div id="name-section" className="flex">
                                 <div>
                                     <label htmlFor="firstName" className="block mb-2 text-sm font-medium">First name</label>
                                     <input
@@ -95,8 +139,17 @@ export default function RegisterForm() {
                                         placeholder="First name"
                                         value={formState.firstName}
                                         onChange={changeHandler}
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                        className={
+                                            hasErrorInput(errors, 'firstName')
+                                                ? 'input-error'
+                                                : 'input-field'
+                                        }
                                     />
+                                    {hasErrorInput(errors, 'firstName') &&
+                                        <div className="text-red-700 p-1 rounded relative" role="alert">
+                                            <span className="block sm:inline">{errors.firstName}</span>
+                                        </div>
+                                    }
                                 </div>
                                 <div>
                                     <label htmlFor="lastName" className="block mb-2 text-sm font-medium">Last name</label>
@@ -106,10 +159,20 @@ export default function RegisterForm() {
                                         placeholder="Last name"
                                         value={formState.lastName}
                                         onChange={changeHandler}
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                        className={
+                                            hasErrorInput(errors, 'lastName')
+                                                ? 'input-error'
+                                                : 'input-field'
+                                        }
                                     />
+                                    {hasErrorInput(errors, 'lastName') &&
+                                        <div className="text-red-700 p-1 rounded relative" role="alert">
+                                            <span className="block sm:inline">{errors.lastName}</span>
+                                        </div>
+                                    }
                                 </div>
                             </div>
+
                             <div>
                                 <label htmlFor="phoneNumber" className="block mb-2 text-sm font-medium">Phone number</label>
                                 <input
@@ -118,8 +181,18 @@ export default function RegisterForm() {
                                     placeholder="Phone number"
                                     value={formState.phoneNumber}
                                     onChange={changeHandler}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                    className={
+                                        hasErrorInput(errors, 'phoneNumber')
+                                            ? 'input-error'
+                                            : 'input-field'
+                                    }
                                 />
+
+                                {hasErrorInput(errors, 'phoneNumber') &&
+                                    <div className="text-red-700 p-1 rounded relative" role="alert">
+                                        <span className="block sm:inline">{errors.phoneNumber}</span>
+                                    </div>
+                                }
                             </div>
                             <div>
                                 <label htmlFor="address" className="block mb-2 text-sm font-medium">Address</label>
@@ -129,8 +202,17 @@ export default function RegisterForm() {
                                     placeholder="Address"
                                     value={formState.address}
                                     onChange={changeHandler}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                    className={
+                                        hasErrorInput(errors, 'address')
+                                            ? 'input-error'
+                                            : 'input-field'
+                                    }
                                 />
+                                {hasErrorInput(errors, 'address') &&
+                                    <div className="text-red-700 p-1 rounded relative" role="alert">
+                                        <span className="block sm:inline">{errors.address}</span>
+                                    </div>
+                                }
                             </div>
                             <div>
                                 <label htmlFor="city" className="block mb-2 text-sm font-medium">City</label>
@@ -140,25 +222,33 @@ export default function RegisterForm() {
                                     placeholder="City"
                                     value={formState.city}
                                     onChange={changeHandler}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                                    className={
+                                        hasErrorInput(errors, 'city')
+                                            ? 'input-error'
+                                            : 'input-field'
+                                    }
                                 />
                             </div>
 
+                            {hasErrorInput(errors, 'city') &&
+                                <div className="text-red-700 p-1 rounded relative" role="alert">
+                                    <span className="block sm:inline">{errors.city}</span>
+                                </div>
+                            }
+
                         </div>
 
-                        {errors.length !== 0
-                            && <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                                <span class="block sm:inline">{errors}</span>
-                                <span
-                                    class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                                    <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" /></svg>
-                                </span>
+                        {hasErrorInput(errors, 'credentials') &&
+                            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                                <span className="block sm:inline">{errors.credentials}</span>
                             </div>
-                        }
 
+                        }
+                        
                         <button
                             type="submit"
-                            className="w-full text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-5 py-2.5 text-center overflow-clip">
+                            className="w-full text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-5 py-2.5 text-center overflow-clip"
+                        >
                             Sign up
                         </button>
 
