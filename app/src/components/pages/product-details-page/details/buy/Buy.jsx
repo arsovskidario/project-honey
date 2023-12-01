@@ -1,12 +1,17 @@
 import { useState, useEffect, useContext } from "react";
 
 import ShoppingCartContext  from "../../../../../contexts/ShoppingCartContext";
+import AuthContext from "../../../../../contexts/AuthContext";
+import EditProductModal from "../edit/EditProductDetails";
 
 export default function Buy({
     item
 }) {
+    const {isUserAdmin} = useContext(AuthContext);
+
     const [orderQuantity, setOrderQuantity] = useState(1);
     const [copied, setCopied] = useState(false);
+    const [isEditAcitve, setIsEditActive] = useState(false);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -38,7 +43,7 @@ export default function Buy({
         </option>
     ));
 
-    return (
+    return ( 
         <div id="product-buy" className="flex flex-col w-1/8 p-2">
             <div className="flex">
             <label htmlFor="countries" className="m-1 block mb-2 text-sm font-medium text-starsBrown">Quantity:</label>
@@ -60,6 +65,15 @@ export default function Buy({
                     ? "Share"
                     : "Copied!"}
             </button>
+
+            {isUserAdmin() &&
+            <button onClick={() => setIsEditActive(true)}
+                className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-2.5 py-1.5 text-center overflow-clip">
+                Edit
+            </button>
+            }
+              {isEditAcitve && <EditProductModal productDetails={item} closeHandler={()=> setIsEditActive(false)}/>}
         </div>
+        
     );
 }

@@ -37,11 +37,16 @@ export function AuthProvider({
         navigate('/');
     }
 
+    const isUserAdmin = () => {
+        return username === "admin";
+    }
+
     const values = {
         username,
         accessToken,
         login,
-        logout
+        logout,
+        isUserAdmin
     }
 
     return <AuthContext.Provider value={values}>
