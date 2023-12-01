@@ -22,6 +22,10 @@ export default function ProductDetails({
         )
     }, [])
 
+    const updateProductDetails = (updatedProduct) => {
+        setCurrentProduct(updatedProduct);
+    }
+
     return (
         <section id={`product-${_id}`} className="bg-productWhite mt-10">
             <Link to={`/${currentProduct.category}`} className="text-starsBrown ml-4" >{`home > ${currentProduct.category}`}</Link>
@@ -54,7 +58,7 @@ export default function ProductDetails({
                     </div>
                     <p>{currentProduct.description}</p>
                 </div>
-               <Buy item={currentProduct}/>
+               <Buy item={currentProduct} updateProductDetails={updateProductDetails}/>
             </div>
         </section>
     );

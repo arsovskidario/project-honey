@@ -18,6 +18,24 @@ export async function getProductsPageInfo(page) {
     return response.json();
 }
 
+export async function editProductInfo(_id, details, token) {
+    const url = `${baseUrl}/products/${_id}`;
+    const response = await fetch(url,{
+        method:'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            "X-Admin": token
+        },
+        body: JSON.stringify(details)
+    });
+    
+    if (!response.ok) {
+        throw new Error(response.status);
+    }
+    
+    return response.json();
+}
+
 export async function getProductInfo(_id) {
     const url = `${baseUrl}/products/${_id}`;
     const response = await fetch(url);
@@ -66,6 +84,5 @@ export async function createProductReview(data, token) {
     
     return response.json();
 }
-
 
 

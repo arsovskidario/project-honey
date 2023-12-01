@@ -1,15 +1,21 @@
 import useForm from "../../../../../hooks/useForm";
+import { editProductInfo } from "../../../../../services/productsService";
 
 export default function EditProductModal({
     productDetails,
+    updateProductDetails,
     closeHandler
 }) {
 
-    const submitHandler = () => {
-        console.log(formState);
-        console.log("submit pressed");
-
-        closeHandler();
+    const submitHandler = async () => {
+        try {
+            const response = await editProductInfo(productDetails._id, formState);
+            updateProductDetails(response);
+        } catch (error) {
+            console.log('service unavailable');
+        } finally {
+            closeHandler();
+        }
     }
     const { formState, changeHandler, onSubmit } = useForm(productDetails, submitHandler);
 

@@ -5,7 +5,8 @@ import AuthContext from "../../../../../contexts/AuthContext";
 import EditProductModal from "../edit/EditProductDetails";
 
 export default function Buy({
-    item
+    item,
+    updateProductDetails
 }) {
     const {isUserAdmin} = useContext(AuthContext);
 
@@ -72,7 +73,10 @@ export default function Buy({
                 Edit
             </button>
             }
-              {isEditAcitve && <EditProductModal productDetails={item} closeHandler={()=> setIsEditActive(false)}/>}
+              {isEditAcitve && <EditProductModal 
+              productDetails={item} 
+              updateProductDetails={updateProductDetails}
+              closeHandler={()=> setIsEditActive(false)}/>}
         </div>
         
     );
