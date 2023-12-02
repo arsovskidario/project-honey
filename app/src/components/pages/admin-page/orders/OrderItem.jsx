@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import { convertTimestampToEUFormat } from "../../../../util/timeUtil";
 import { getUserDetailsByUsername } from "../../../../services/authService";
 
+const initialUserDetails = {
+    fullName: '',
+    phoneNumber: '',
+    address: ''
+}
+
 export default function OrderItem({
     _id,
     _createdOn,
@@ -12,13 +18,18 @@ export default function OrderItem({
     completeOrderHandler
 }) {
 
-    const [userDetails, setUserDetails] = useState({});
+    const [userDetails, setUserDetails] = useState(initialUserDetails);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await getUserDetailsByUsername(username);
+
+            //TODO: Probs log when data is not available
+            if (data.length > 0) {
                 setUserDetails(data[0]);
+            } 
+
             } catch (error) {
                 console.log("failed to fetch user details " + error);
             }
