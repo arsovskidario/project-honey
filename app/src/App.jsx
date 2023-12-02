@@ -15,6 +15,11 @@ import LoginPage from './components/user-panel/LoginPage'
 import RegisterPage from './components/user-panel/RegisterPage'
 import ErrorPage from './components/errors/ErrorPage'
 import ErrorBoundary from './components/errors/ErrorBoundary'
+import AuthGuard from './AuthGuard'
+import AdminPage from './components/pages/admin-page/AdminPage'
+import { OrderPage } from './components/pages/admin-page/orders/OrderPage'
+import { ProductPage } from './components/pages/admin-page/ProductPage'
+import { UsersPage } from './components/pages/admin-page/users/UsersPage'
 
 function App() {
 
@@ -23,7 +28,7 @@ function App() {
       <AuthProvider>
         <ShoppingCartProvider>
           <Header />
-          
+
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/honey" element={<HoneyPage />} />
@@ -34,6 +39,14 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/error" element={<ErrorPage />} />
+
+            <Route path="/admin" element={<AuthGuard />}>
+              <Route index element={<AdminPage />} />
+              <Route path="orders" element={<OrderPage />} />
+              <Route path="products" element={<ProductPage />} />
+              <Route path="users" element={<UsersPage />} />
+            </Route>
+
           </Routes>
 
           <Footer />

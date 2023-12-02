@@ -1,7 +1,7 @@
 const baseUrl = "http://localhost:3030/data"
 
 export async function getFeaturedProducts() {
-    const response = await fetch(`${baseUrl}/products?sortBy=createdOn%20desc`);
+    const response = await fetch(`${baseUrl}/products?sortBy=_createdOn%20desc`);
     if (!response.ok) {
         throw new Error('Service is unavaibable');
     }
@@ -18,8 +18,55 @@ export async function getProductsPageInfo(page) {
     return response.json();
 }
 
+export async function createProduct(data, token) {
+    const url = `${baseUrl}/products`;
+    const response = await fetch(url,{
+        method:'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "X-Authorization": token
+        },
+        body: JSON.stringify(data)
+    })
+    
+    if (!response.ok) {
+        throw new Error(response.status);
+    }
+    
+    return response.json();
+}
+
+
+export async function editProductInfo(_id, details, token) {
+    const url = `${baseUrl}/products/${_id}`;
+    const response = await fetch(url,{
+        method:'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            "X-Admin": token
+        },
+        body: JSON.stringify(details)
+    });
+    
+    if (!response.ok) {
+        throw new Error(response.status);
+    }
+    
+    return response.json();
+}
+
 export async function getProductInfo(_id) {
     const url = `${baseUrl}/products/${_id}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Service is unavaibable');
+    }
+    
+    return response.json();
+}
+
+export async function getAllProducts() {
+    const url = `${baseUrl}/products`;
     const response = await fetch(url);
     if (!response.ok) {
         throw new Error('Service is unavaibable');
@@ -56,6 +103,5 @@ export async function createProductReview(data, token) {
     
     return response.json();
 }
-
 
 

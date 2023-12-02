@@ -1,12 +1,18 @@
 import { useState, useEffect, useContext } from "react";
 
-import ShoppingCartContext  from "../../../../../contexts/ShoppingCartContext";
+import ShoppingCartContext from "../../../../../contexts/ShoppingCartContext";
+import AuthContext from "../../../../../contexts/AuthContext";
+import ProductDetailsModal from "../modal/ProductDetailsModal";
 
 export default function Buy({
-    item
+    item,
+    updateProductDetails
 }) {
+    const { isUserAdmin } = useContext(AuthContext);
+
     const [orderQuantity, setOrderQuantity] = useState(1);
     const [copied, setCopied] = useState(false);
+    const [isEditAcitve, setIsEditActive] = useState(false);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -25,10 +31,10 @@ export default function Buy({
         setOrderQuantity(e.target.value);
     }
 
-    const {addCartItems} = useContext(ShoppingCartContext);
+    const { addCartItems } = useContext(ShoppingCartContext);
 
     const addItemToCartHandler = () => {
-        const currItem = {...item, orderQuantity};
+        const currItem = { ...item, orderQuantity };
         addCartItems(currItem);
     }
 
@@ -41,13 +47,13 @@ export default function Buy({
     return (
         <div id="product-buy" className="flex flex-col w-1/8 p-2">
             <div className="flex">
-            <label htmlFor="countries" className="m-1 block mb-2 text-sm font-medium text-starsBrown">Quantity:</label>
-            <select id="countries"
-                value={orderQuantity}
-                onChange={quantityHandler}
-                className="m-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
-                {options}
-            </select>
+                <label htmlFor="countries" className="m-1 block mb-2 text-sm font-medium text-starsBrown">Quantity:</label>
+                <select id="countries"
+                    value={orderQuantity}
+                    onChange={quantityHandler}
+                    className="m-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
+                    {options}
+                </select>
             </div>
 
             <button onClick={addItemToCartHandler}
@@ -60,6 +66,19 @@ export default function Buy({
                     ? "Share"
                     : "Copied!"}
             </button>
+
+            {isUserAdmin() &&
+                <button onClick={() => setIsEditActive(true)}
+                    className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-2.5 py-1.5 text-center overflow-clip">
+                    Edit
+                </button>
+            }
+            {isEditAcitve && <ProductDetailsModal
+                operationType={'update'}
+                productDetails={item}
+                updateProductDetails={updateProductDetails}
+                closeHandler={() => setIsEditActive(false)} />}
         </div>
+
     );
 }
