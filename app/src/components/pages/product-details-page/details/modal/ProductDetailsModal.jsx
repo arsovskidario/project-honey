@@ -1,16 +1,33 @@
+import { useContext } from "react";
 import useForm from "../../../../../hooks/useForm";
-import { editProductInfo } from "../../../../../services/productsService";
+import { createProduct, editProductInfo } from "../../../../../services/productsService";
+import AuthContext from "../../../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-export default function EditProductModal({
+export default function ProductDetailsModal({
+    operationType,
     productDetails,
     updateProductDetails,
     closeHandler
 }) {
+    const {accessToken} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const submitHandler = async () => {
         try {
-            const response = await editProductInfo(productDetails._id, formState);
-            updateProductDetails(response);
+
+            if(operationType === 'create') {
+                const response = await createProduct(formState, accessToken);
+                navigate(`/product-details/${response._id}`);
+
+            } else if (operationType ==='update') {
+                console.log('update operatino')
+                const response = await editProductInfo(productDetails._id, formState, accessToken);
+
+                //TDOO: should update shopping cart item here
+                updateProductDetails(response);
+            }
+ 
         } catch (error) {
             console.log('service unavailable');
         } finally {
@@ -26,7 +43,7 @@ export default function EditProductModal({
                 <div className="relative p-4 bg-white rounded-lg shadow sm:p-5">
                     <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5">
                         <h3 className="text-lg font-semibold text-gray-900 ">
-                            Update Product
+                            Product details
                         </h3>
                         <button
                             onClick={closeHandler}
