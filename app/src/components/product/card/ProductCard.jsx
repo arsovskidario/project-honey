@@ -8,10 +8,10 @@ export default function ProductCard({
     imgUrl
 }) {
     return (
-        <div className="p-8 md:flex md:justify-center md:items-center overflow-hidden bg-productWhite border border-gray-200 rounded-lg shadow">
+        <div className="p-8 justify-center items-center overflow-hidden bg-productWhite border border-gray-200 rounded-lg shadow">
 
             <Link to={`/product-details/${_id}`}>
-                <img className="rounded-t-lg" src={imgUrl} alt={`${name} image`} />
+                <img className="rounded-t-lg w-full" src={imgUrl} alt={`${name} image`} />
             </Link>
 
             <div className="px-5 pb-5">

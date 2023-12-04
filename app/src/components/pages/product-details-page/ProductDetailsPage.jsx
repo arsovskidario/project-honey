@@ -6,7 +6,7 @@ export default function ProductDetailsPage() {
     const { productId } = useParams();
     
     return (
-        <main>
+        <main className="h-screen"> 
             <ProductDetails _id={productId} />
             <ProductReviews _id={productId} />
         </main>

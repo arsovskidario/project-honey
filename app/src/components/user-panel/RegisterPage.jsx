@@ -2,10 +2,10 @@ import RegisterForm from "./form/RegisterForm";
 
 export default function RegisterPage() {
     return (
-        <section>
+        <main className="h-screen">
             
          <RegisterForm/>
 
-        </section>
+        </main>
     )
 }

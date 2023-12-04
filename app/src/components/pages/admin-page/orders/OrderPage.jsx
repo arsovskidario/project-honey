@@ -6,7 +6,7 @@ import AuthContext from "../../../../contexts/AuthContext";
 import { deleteOrder, getAllOrders } from "../../../../services/orderService";
 import OrderItem from "./OrderItem";
 
-export function OrderPage() {
+export default function OrderPage() {
   const navigate = useNavigate();
 
   const {accessToken} = useContext(AuthContext);

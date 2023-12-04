@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getUserDetails } from "../../../../services/authService";
 import UserItem from "./UserItem";
 
-export function UsersPage() {
+export default function UsersPage() {
     const [userDetails, setUserDetails] = useState([]);
 
     useEffect(() => {

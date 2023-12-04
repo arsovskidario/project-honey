@@ -7,12 +7,12 @@ export default function LoginPage() {
     const {username} = useContext(AuthContext);
 
     return (
-        <section>
+        <main className="h-screen">
             {username.length !== 0 ?
               <LogoutSubmit/>
             : <LoginForm/>
             } 
 
-        </section>
+        </main>
     )
 }

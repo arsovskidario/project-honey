@@ -17,9 +17,10 @@ import ErrorPage from './components/errors/ErrorPage'
 import ErrorBoundary from './components/errors/ErrorBoundary'
 import AuthGuard from './AuthGuard'
 import AdminPage from './components/pages/admin-page/AdminPage'
-import { OrderPage } from './components/pages/admin-page/orders/OrderPage'
-import { ProductPage } from './components/pages/admin-page/ProductPage'
-import { UsersPage } from './components/pages/admin-page/users/UsersPage'
+import OrderPage from './components/pages/admin-page/orders/OrderPage'
+import ProductPage from './components/pages/admin-page/ProductPage'
+import UsersPage from './components/pages/admin-page/users/UsersPage'
+import AboutPage from './components/pages/about-page/AboutPage'
 
 function App() {
 
@@ -39,7 +40,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/error" element={<ErrorPage />} />
-
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/admin" element={<AuthGuard />}>
               <Route index element={<AdminPage />} />
               <Route path="orders" element={<OrderPage />} />

@@ -29,8 +29,8 @@ export default function ProductDetails({
     return (
         <section id={`product-${_id}`} className="bg-productWhite mt-10">
             <Link to={`/${currentProduct.category}`} className="text-starsBrown ml-4" >{`home > ${currentProduct.category}`}</Link>
-            <div className="flex flex-row justify-center items-center pb-5">
-                <div id="product-img" className="w-1/6 p-2">
+            <div className="flex md:flex-row  flex-col justify-center items-center pb-5">
+                <div id="product-img" className="md:w-1/6 p-2">
                     <img src={currentProduct.imgUrl} />
                 </div>
                 <div id="product-info" className="w-1/2 p-2">
