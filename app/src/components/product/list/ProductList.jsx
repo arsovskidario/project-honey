@@ -45,7 +45,8 @@ export default function ProductList({
     return (
         <div className="flex flex-col items-center">
             <h1 className="mt-10 text-2xl">{capitalizeFirstLetter(productName)}</h1>
-            <div id={`${productName}-list`} className="w-3/6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-5">
+            <div id={`${productName}-list`}
+                className="w-5/6 grid grid-cols-2 sm:w-3/6 sm:grid-cols-2 md:w-3/6 md:grid-cols-2 lg:w-3/6 lg:grid-cols-3 xl:w-3/6 xl:grid-cols-3 gap-4 mt-5">
                 {products.map(product =>
                     <ProductCard key={product._id} {...product}
                     />
