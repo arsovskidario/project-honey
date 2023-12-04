@@ -1,13 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import Banner from "../../banner/Banner";
 
 export default function AboutPage() {
-    useEffect(() => {
-        // Scroll to the top of the page
-        window.scrollTo(0, 0);
-    }, []); // Empty dependency array ensures this effect runs only once when the component mounts
 
+    const ref = useRef(null)
+    useEffect(() => {
+        const hash = window.location.hash;
+        if (hash === "#contact") {
+            ref.current?.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            window.scrollTo(0, 0);
+        }
+    }, []);
 
     return (
         <main>
@@ -59,6 +64,37 @@ export default function AboutPage() {
                         journey of taste, tradition, and purity.
                     </p>
                 </div>
+            </section>
+
+            <section
+                id="contact"
+                ref={ref}
+                className="container mx-auto py-8">
+                <h2 className="text-2xl font-bold mt-4 mb-2 text-yellow-600">Contact us</h2>
+                <div className="flex flex-wrap -mx-2 mt-5">
+                    <div className="w-full md:w-1/2 px-2 mb-4">
+                        <h3 className="text-lg font-semibold">Our Address</h3>
+                        <p className="text-gray-700">
+                            Balkan Nectar Beekeeping<br />
+                            123 Honey Bee Lane<br />
+                            Beeville, BH 54321<br />
+                            Balkans
+                        </p>
+                    </div>
+
+                    <div className="w-full md:w-1/2 px-2 mb-4">
+                        <h3 className="text-lg font-semibold">Phone</h3>
+                        <p className="text-gray-700">General Inquiries: +123 456 7890</p>
+                        <p className="text-gray-700">Customer Support: +123 456 7891</p>
+                    </div>
+
+                    <div className="w-full px-2 mb-4">
+                        <h3 className="text-lg font-semibold">Email</h3>
+                        <p className="text-gray-700">Email: info@balkannectar.com</p>
+                    </div>
+                </div>
+
+
             </section>
         </main>
     )
