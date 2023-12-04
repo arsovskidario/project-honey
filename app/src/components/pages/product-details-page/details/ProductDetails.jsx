@@ -55,10 +55,19 @@ export default function ProductDetails({
                             <span className="text-starsBrown text-xs font-semibold px-2.5 py-0.5 roundedms-3 overflow-clip">{currentProduct.rating}</span>
                         </div>
                         <span className="mt-4 font-bold">${currentProduct.price}</span>
+                        <div className="p-2 hidden md:block">
+                            <h1>Product description</h1>
+                            <p>{currentProduct.description}</p>
+                        </div>
                     </div>
+                </div>
+                
+                <Buy item={currentProduct} updateProductDetails={updateProductDetails} />
+
+                <div id="mobile-desc" className="p-2 md:hidden">
+                    <h1>Product description</h1>
                     <p>{currentProduct.description}</p>
                 </div>
-               <Buy item={currentProduct} updateProductDetails={updateProductDetails}/>
             </div>
         </section>
     );

@@ -71,7 +71,7 @@ export default function AboutPage() {
                 ref={ref}
                 className="container mx-auto py-8">
                 <h2 className="text-2xl font-bold mt-4 mb-2 text-yellow-600">Contact us</h2>
-                <div className="flex flex-wrap -mx-2 mt-5">
+                <div className="flex flex-wrap mt-5">
                     <div className="w-full md:w-1/2 px-2 mb-4">
                         <h3 className="text-lg font-semibold">Our Address</h3>
                         <p className="text-gray-700">
@@ -94,8 +94,8 @@ export default function AboutPage() {
                     </div>
                 </div>
 
-
             </section>
+
         </main>
     )
 }
