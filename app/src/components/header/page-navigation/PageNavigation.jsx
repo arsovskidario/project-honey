@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+
 import './PageNavigation.css'
+import AuthContext from '../../../contexts/AuthContext'
 
 export default function PageNavigation({
     direction,
     isDropDownToggled
 }
 ) {
+    const {isLoggedIn} = useContext(AuthContext);
+
     return (
         <ul className={`flex ${direction} list`}>
             <li>
@@ -17,9 +22,13 @@ export default function PageNavigation({
             <li>
                 <Link to="gifts" className="list-item">Gifts</Link>
             </li>
-            {isDropDownToggled && (<li>
-                <Link to="login" className="list-item">User Panel</Link>
-            </li>)}
+            {isDropDownToggled && (
+                <li>
+                    <Link to="/login" className="list-item">
+                        {isLoggedIn() ? "Login" : "Profile"}
+                    </Link>
+                </li>
+            )}
         </ul>
     )
 }
