@@ -1,13 +1,29 @@
 import './Newsletter.css'
 
 import useForm from '../../../../hooks/useForm';
-
+import { hasErrors, hasErrorInput, validateFields } from '../../../../util/validationUtil';
+import { createSubscription } from '../../../../services/newsletterService';
 
 export default function NewsLetter() {
+    const submitHandler = async () => {
+        const validationErrors = validateFields(formState);
+        addValidationErrors(validationErrors);
+        console.log(validationErrors);
+        if (!hasErrors(validationErrors)) {
+            try {
+                const data = await createSubscription({
+                    email: formState.email,
+                });
+                console.log(data);
+            } catch (error) {
+                if (error.message === "403") {
+                    addValidationErrors({ 'email': 'Please try again later.' });
+                } else {
+                    navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`);
+                }
+            }
+        }
 
-    const submitHandler = () => {
-        console.log('pressed');
-        console.log(JSON.stringify(formState));
     }
 
     const { formState, changeHandler, onSubmit, errors, addValidationErrors } = useForm({ email: '' }, submitHandler);
@@ -33,11 +49,16 @@ export default function NewsLetter() {
                         onChange={changeHandler}
                         className="min-w-0 flex-auto rounded-md border-0 bg-stone-100 px-3.5 py-2  placeholder-gray shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6" placeholder="Enter your email" />
 
+
+
                     <button type="submit" className="flex-none rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Sign up</button>
                 </form>
-
-
-
+                
+                {hasErrorInput(errors, 'email') &&
+                    <div className="text-white rounded relative" role="alert">
+                        <span className="block sm:inline">{errors.email}</span>
+                    </div>
+                }
             </div>
         </section>
     )
