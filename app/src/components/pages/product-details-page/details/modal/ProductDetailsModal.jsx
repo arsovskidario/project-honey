@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import useForm from "../../../../../hooks/useForm";
-import { createProduct, editProductInfo } from "../../../../../services/productsService";
+import { createProduct, deleteProduct, editProductInfo } from "../../../../../services/productsService";
 import AuthContext from "../../../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -10,24 +10,36 @@ export default function ProductDetailsModal({
     updateProductDetails,
     closeHandler
 }) {
-    const {accessToken} = useContext(AuthContext);
+    const { accessToken } = useContext(AuthContext);
     const navigate = useNavigate();
+
+
+    const deleteProductHandler = async () => {
+        try {
+            const response = await deleteProduct(productDetails._id, accessToken);
+            navigate(`/admin/products`);
+        }
+        catch (error) {
+            console.log('service unavailable');
+        } finally {
+            closeHandler();
+        }
+    }
 
     const submitHandler = async () => {
         try {
-
-            if(operationType === 'create') {
+            if (operationType === 'create') {
                 const response = await createProduct(formState, accessToken);
                 navigate(`/product-details/${response._id}`);
 
-            } else if (operationType ==='update') {
+            } else if (operationType === 'update') {
                 console.log('update operatino')
                 const response = await editProductInfo(productDetails._id, formState, accessToken);
 
                 //TDOO: should update shopping cart item here
                 updateProductDetails(response);
             }
- 
+
         } catch (error) {
             console.log('service unavailable');
         } finally {
@@ -104,10 +116,20 @@ export default function ProductDetailsModal({
                                     </path>
                                 </svg>
                                 <span>Edit</span></button>
-                            <button type="submit" className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                <svg className="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd"></path></svg>
-                                Delete
-                            </button>
+
+                            {operationType === 'create' ?
+                                (<button type="button"
+                                    onClick={closeHandler}
+                                    className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                    <svg className="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd"></path></svg>
+                                    Cancel
+                                </button>)
+                                : (<button type="button"
+                                    onClick={deleteProductHandler}
+                                    className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                    <svg className="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd"></path></svg>
+                                    Delete
+                                </button>)}
                         </div>
                     </form>
                 </div>

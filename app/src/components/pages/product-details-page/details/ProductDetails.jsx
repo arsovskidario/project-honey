@@ -10,6 +10,11 @@ export default function ProductDetails({
     _id
 }) {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const [currentProduct, setCurrentProduct] = useState({});
 
     useEffect(() => {
@@ -61,7 +66,7 @@ export default function ProductDetails({
                         </div>
                     </div>
                 </div>
-                
+
                 <Buy item={currentProduct} updateProductDetails={updateProductDetails} />
 
                 <div id="mobile-desc" className="p-2 md:hidden">
