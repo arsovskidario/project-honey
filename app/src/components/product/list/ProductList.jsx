@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getAllProducts, getProductsPageInfo } from "../../../services/productsService";
+import { getAllProducts, getFeaturedProducts, getProductsPageInfo } from "../../../services/productsService";
 import { ERROR_CODE } from "../../constants/constants";
 
 import ProductCard from "../card/ProductCard";
@@ -20,11 +20,16 @@ export default function ProductList({
 
                 if (productName === '') {
                     data = await getAllProducts();
-                } else {
+                } else if (productName === 'featured products') {
+                    data = await getFeaturedProducts();
+                }
+                else {
                     data = await getProductsPageInfo(productName);
                 }
 
-                setProducts(Object.values(data));
+                setProducts(productName === 'featured products'
+                    ? Object.values(data).slice(0, 3)
+                    : Object.values(data));
             } catch (error) {
                 navigate(`/error?message=${ERROR_CODE.SERVICE_UNAVAILABLE}`);
             }
@@ -40,7 +45,8 @@ export default function ProductList({
     return (
         <div className="flex flex-col items-center">
             <h1 className="mt-10 text-2xl">{capitalizeFirstLetter(productName)}</h1>
-            <div id={`${productName}-list`} className="w-4/5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-5">
+            <div id={`${productName}-list`}
+                className="w-5/6 grid grid-cols-2 sm:w-3/6 sm:grid-cols-2 md:w-3/6 md:grid-cols-2 lg:w-3/6 lg:grid-cols-3 xl:w-3/6 xl:grid-cols-3 gap-4 mt-5">
                 {products.map(product =>
                     <ProductCard key={product._id} {...product}
                     />

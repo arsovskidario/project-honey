@@ -36,6 +36,22 @@ export async function createProduct(data, token) {
     return response.json();
 }
 
+export async function deleteProduct(_id, adminToken) {
+    const url = `${baseUrl}/products/${_id}`;
+    const response = await fetch(url,{
+        method:'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "X-Admin": adminToken
+        },
+    });
+    
+    if (!response.ok) {
+        throw new Error(response.status);
+    }
+    
+    return response.json();
+}
 
 export async function editProductInfo(_id, details, token) {
     const url = `${baseUrl}/products/${_id}`;

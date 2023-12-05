@@ -26,14 +26,14 @@ export default function LogoutSubmit() {
             {isAdmin(username) &&
                 <button
                     onClick={adminPanelHandler}
-                    className="m-1 w-1/6 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-5 py-2.5 text-center overflow-clip"
+                    className="m-1 w-1/6 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm md:px-5 md:py-2.5 py-6 text-center overflow-clip"
                 >Admin Panel</button>
 
             }
 
             <button
                 onClick={logoutHandler}
-                className="m-1 w-1/6 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-5 py-2.5 text-center overflow-clip"
+                className="m-1 w-1/6 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm md:px-5 md:py-2.5 py-6 text-center overflow-clip"
             >Logout</button>
         </div>
     )

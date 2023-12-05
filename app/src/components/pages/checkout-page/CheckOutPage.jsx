@@ -67,7 +67,7 @@ export default function CheckOutPage() {
         )
     }
 
-    return <main>
+    return <main className="h-screen">
         <section id="cart" className="flex flex-col bg-productWhite mt-10">
 
             {errors.length !== 0

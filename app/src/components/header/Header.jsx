@@ -20,7 +20,7 @@ export default function Header() {
     }
 
     return (
-
+        <div style={{ position: 'relative', zIndex: 2 }}>
         <nav className="bg-white border-b border-cfb491">
             <div className="max-w-full flex flex-wrap items-center justify-between mx-auto sticky top-0">
                 <div className="m-4 flex">
@@ -86,7 +86,8 @@ export default function Header() {
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
                         </svg>
                     </button>
-                    <div className={`md:hidden absolute top-[50%] xs:top-[85%] overflow-visible ${isDropDownToggled}`}>
+                    <div style={{ zIndex: 999 }}
+                    className={`md:hidden absolute top-[50%] xs:top-[85%] ${isDropDownToggled}`}>
                         <PageNavigation direction='flex-col' isDropDownToggled={isDropDownToggled} />
                     </div>
                 </div>
@@ -108,5 +109,6 @@ export default function Header() {
 
             </div>
         </nav>
+        </div>
     );
 }

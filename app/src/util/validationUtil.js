@@ -24,6 +24,10 @@ function isNumeric(value) {
     return /^-?\d+$/.test(value);
 }
 
+function isPositiveNumber(value) {
+    return /^\d*\.?\d+$/.test(value);
+}
+
 export const validateFields = (fields) => {
     const errors = {};
 
@@ -66,6 +70,32 @@ export const validateFields = (fields) => {
         errors['loginPassword'] = 'Please enter your password!';
     }
 
+    return errors;
+
+}
+
+export const validateProduct = (fields) => {
+    const errors = {};
+    if ('name' in fields && isEmptyOrNull(fields['name'])) {
+        errors['name'] = 'Please enter a valid product name!';
+    }
+
+    if ('category' in fields && isEmptyOrNull(fields['category'])) {
+        errors['category'] = 'Please enter a valid category!';
+    }
+
+    if ('imgUrl' in fields && isEmptyOrNull(fields['imgUrl'])) {
+        errors['imgUrl'] = 'Please enter a valid imgUrl!';
+    }
+
+    if ('description' in fields && isEmptyOrNull(fields['description'])) {
+        errors['description'] = 'Please enter a valid description!';
+    }
+
+    if ('price' in fields && !isPositiveNumber(fields['price'])) {
+        errors['price'] = 'Please enter a valid price!';
+    }
+ 
     return errors;
 
 }

@@ -10,6 +10,11 @@ export default function ProductDetails({
     _id
 }) {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const [currentProduct, setCurrentProduct] = useState({});
 
     useEffect(() => {
@@ -29,8 +34,8 @@ export default function ProductDetails({
     return (
         <section id={`product-${_id}`} className="bg-productWhite mt-10">
             <Link to={`/${currentProduct.category}`} className="text-starsBrown ml-4" >{`home > ${currentProduct.category}`}</Link>
-            <div className="flex flex-row justify-center items-center pb-5">
-                <div id="product-img" className="w-1/6 p-2">
+            <div className="flex md:flex-row  flex-col justify-center items-center pb-5">
+                <div id="product-img" className="md:w-1/6 p-2">
                     <img src={currentProduct.imgUrl} />
                 </div>
                 <div id="product-info" className="w-1/2 p-2">
@@ -55,10 +60,19 @@ export default function ProductDetails({
                             <span className="text-starsBrown text-xs font-semibold px-2.5 py-0.5 roundedms-3 overflow-clip">{currentProduct.rating}</span>
                         </div>
                         <span className="mt-4 font-bold">${currentProduct.price}</span>
+                        <div className="p-2 hidden md:block">
+                            <h1>Product description</h1>
+                            <p>{currentProduct.description}</p>
+                        </div>
                     </div>
+                </div>
+
+                <Buy item={currentProduct} updateProductDetails={updateProductDetails} />
+
+                <div id="mobile-desc" className="p-2 md:hidden">
+                    <h1>Product description</h1>
                     <p>{currentProduct.description}</p>
                 </div>
-               <Buy item={currentProduct} updateProductDetails={updateProductDetails}/>
             </div>
         </section>
     );

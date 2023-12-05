@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 import { AuthProvider } from './contexts/AuthContext'
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext'
@@ -17,9 +17,11 @@ import ErrorPage from './components/errors/ErrorPage'
 import ErrorBoundary from './components/errors/ErrorBoundary'
 import AuthGuard from './AuthGuard'
 import AdminPage from './components/pages/admin-page/AdminPage'
-import { OrderPage } from './components/pages/admin-page/orders/OrderPage'
-import { ProductPage } from './components/pages/admin-page/ProductPage'
-import { UsersPage } from './components/pages/admin-page/users/UsersPage'
+import OrderPage from './components/pages/admin-page/orders/OrderPage'
+import ProductPage from './components/pages/admin-page/ProductPage'
+import UsersPage from './components/pages/admin-page/users/UsersPage'
+import AboutPage from './components/pages/about-page/AboutPage'
+import { ERROR_CODE } from './components/constants/constants'
 
 function App() {
 
@@ -39,16 +41,17 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/error" element={<ErrorPage />} />
-
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/admin" element={<AuthGuard />}>
               <Route index element={<AdminPage />} />
               <Route path="orders" element={<OrderPage />} />
               <Route path="products" element={<ProductPage />} />
               <Route path="users" element={<UsersPage />} />
             </Route>
-
+            
+            <Route path="/product-details" element={<Navigate to="/"/>} />
+            <Route path="*" element={<Navigate to={`/error?message=${ERROR_CODE.NOT_FOUND}`}/>} />
           </Routes>
-
           <Footer />
         </ShoppingCartProvider>
       </AuthProvider>

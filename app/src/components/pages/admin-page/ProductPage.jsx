@@ -9,7 +9,7 @@ const initialProduct = {
     imgUrl: '',
     description: ''
 }
-export function ProductPage() {
+export default function ProductPage() {
     const [isEditAcitve, setIsEditActive] = useState(false);
 
     return <main className="flex flex-col items-center justify-center">

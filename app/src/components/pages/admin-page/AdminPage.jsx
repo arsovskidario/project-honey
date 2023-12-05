@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 export default function AdminPage() {
     const navigate = useNavigate();
 
-    return <section className="flex flex-col items-center justify-center">
+    return <main className="flex flex-col items-center justify-center">
         <h1 className="mt-10 text-2xl">Admin panel</h1>
         <div className="flex md:flex-row flex-col items-center justify-around mt-10 w-5/6 bg-productWhite">
 
@@ -25,5 +25,5 @@ export default function AdminPage() {
                 Products
             </button>
         </div>
-    </section>
+    </main>
 }

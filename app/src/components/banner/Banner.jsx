@@ -12,10 +12,10 @@ export default function Banner({
     return (
         <section
             id="banner"
-            style={{ backgroundImage: `url('${bannerUrl}')` }}
+            style={{ backgroundImage: `url('${bannerUrl}')` , position: 'relative', zIndex: 1}}
             className="banner-bg">
-            <h1 className="text-white text-6xl main-page-header mt-10">{bannerName}</h1>
-            <h2 className="text-xl m-2 text-opacity-100">{bannerDescription}</h2>
+            <h1 className="text-white text-6xl main-page-header mt-10 text-center">{bannerName}</h1>
+            <h2 className="text-white text-xl m-2 text-opacity-100 text-center">{bannerDescription}</h2>
             {isMainPage &&
                 <button
                     onClick={() => navigate("/honey")}

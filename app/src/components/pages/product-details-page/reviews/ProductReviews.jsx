@@ -72,9 +72,9 @@ export default function ProductReviews({
     return (
         <section id={`product-${_id}`} className="bg-productWhite mt-10 p-4">
             <h1 className="ml-6 mb-2">Product reviews</h1>
-            <div id="reviews" className="flex flex-col justify-start pb-5 ml-10 border-4 border-white">
+            <div id="reviews" className="flex flex-col justify-start pb-5 ml-10 border-2 border-white">
                 {reviews.map(review => {
-                    return <div key={review._id} className="flex flex-row mt-6">
+                    return <div key={review._id} className="flex md:flex-row flex-col mt-6 bg-neutral-50">
                         <div className="ml-6 mt-1">
                             <h2>{review.userName}</h2>
                             <div className="flex items-center space-x-1 rtl:space-x-reverse">
@@ -95,9 +95,10 @@ export default function ProductReviews({
                                 </svg>
                                 <span className="text-starsBrown text-xs font-semibold px-2.5 py-0.5 roundedms-3 overflow-clip">{review.rating}</span>
                             </div>
-                        </div>
-                        <div className="w-1/2 mt-4 ml-20 bg-white">
+                            <div className="mt-4 ml-5">
                             <p className="p-4">{review.comment}</p>
+                        </div>
+
                         </div>
 
                     </div>
@@ -131,7 +132,7 @@ export default function ProductReviews({
                     </textarea>
 
                     {errors.length !== 0 &&
-                        (<div className=" w-1/3 self-center bg-red-100 border border-red-400 text-red-700 px-2 py-1 mt-2 rounded relative" role="alert">
+                        (<div className="w-5/6 md:w-1/5 self-center bg-red-100 border border-red-400 text-red-700 px-2 py-1 mt-2 rounded relative" role="alert">
                             <span className="block sm:inline">{errors}</span>
                         </div>)
                     }

@@ -1,6 +1,6 @@
 import './MainPage.css'
 import Banner from '../../banner/Banner'
-import FeaturedProdcuts from './featured-products/FeaturedProducts'
+import ProductList from '../../product/list/ProductList'
 export default function MainPage() {
     return (
         <main>
@@ -10,7 +10,7 @@ export default function MainPage() {
              bannerDescription={'Where tradition meets the sweetness of nature.'}
              isMainPage={true}
              />
-            <FeaturedProdcuts/>
+            <ProductList productName ="featured products"/>
         </main>
     )
 }
