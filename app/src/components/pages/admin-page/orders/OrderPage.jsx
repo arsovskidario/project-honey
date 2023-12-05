@@ -42,7 +42,7 @@ export default function OrderPage() {
 
   return <main className="flex flex-col items-center justify-center">
     <h1 className="mt-10 text-2xl">Orders</h1>
-    <div className="flex-col items-center justify-around mt-10 w-5/6 bg-productWhite">
+    <div className="flex-col items-center justify-around mt-10 w-5/6 h-screen bg-productWhite">
       {orders.map(order =>
         <OrderItem key={order._id} {...order} completeOrderHandler={completeOrderHandler} />
       )}

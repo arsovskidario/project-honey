@@ -42,7 +42,6 @@ export function AuthProvider({
     }
 
     const isLoggedIn = () => {
-        console.log(username)
         return isEmptyOrNull(username);
     }
 
