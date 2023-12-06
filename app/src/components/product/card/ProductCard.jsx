@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function ProductCard({
     _id,
@@ -7,13 +7,21 @@ export default function ProductCard({
     rating,
     imgUrl
 }) {
+
+    const navigate = useNavigate();
+
+    const onProductImageClick = () => {
+        navigate(`/product-details/${_id}`);
+    }
+
     return (
         <div className="p-8 flex flex-col justify-between items-center overflow-hidden bg-productWhite border border-gray-200 rounded-lg shadow">
 
             <div id="img-container">
-                <Link to={`/product-details/${_id}`}>
-                    <img className="rounded-t-lg w-full" src={imgUrl} alt={`${name} image`} />
-                </Link>
+                    <img 
+                    onClick={onProductImageClick}
+                    className="rounded-t-lg w-full cursor-pointer transition duration-300 transform hover:scale-105" 
+                    src={imgUrl} alt={`${name} image`} />
             </div>
 
             <div id="info-container" className="p-5 flex flex-col items-center">

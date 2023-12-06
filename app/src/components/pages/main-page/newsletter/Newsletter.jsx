@@ -14,6 +14,8 @@ export default function NewsLetter() {
                 const data = await createSubscription({
                     email: formState.email,
                 });
+                addValidationErrors({'email':'Subscribed to newsletter!'})
+
                 console.log(data);
             } catch (error) {
                 if (error.message === "403") {
@@ -40,25 +42,25 @@ export default function NewsLetter() {
                     We promise to sweeten your inbox responsibly.
                 </p>
 
-                <form onSubmit={onSubmit} className="mx-auto mt-10 flex max-w-md gap-x-4">
+                <form onSubmit={onSubmit} className="flex flex-col mx-auto mt-10 max-w-md">
+                    <div className='flex gap-x-4'>
+                        <label htmlFor="email-address" className="sr-only">Email address</label>
+                        <input id="email-address"
+                            name="email"
+                            value={formState.email}
+                            onChange={changeHandler}
+                            className="min-w-0 flex-auto rounded-md border-0 bg-stone-100 px-3.5 py-2  placeholder-gray shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6" placeholder="Enter your email" />
+                        <button type="submit" className="flex-none rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Sign up</button>
 
-                    <label htmlFor="email-address" className="sr-only">Email address</label>
-                    <input id="email-address"
-                        name="email"
-                        value={formState.email}
-                        onChange={changeHandler}
-                        className="min-w-0 flex-auto rounded-md border-0 bg-stone-100 px-3.5 py-2  placeholder-gray shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6" placeholder="Enter your email" />
-
-
-
-                    <button type="submit" className="flex-none rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Sign up</button>
-                </form>
-                
-                {hasErrorInput(errors, 'email') &&
-                    <div className="text-white rounded relative" role="alert">
-                        <span className="block sm:inline">{errors.email}</span>
                     </div>
-                }
+                    {hasErrorInput(errors, 'email') &&
+                        <div className="text-white rounded relative" role="alert">
+                            <span className="block sm:inline">{errors.email}</span>
+                        </div>
+                    }
+                </form>
+
+
             </div>
         </section>
     )
