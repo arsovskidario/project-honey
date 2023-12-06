@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 
 import Banner from "../../banner/Banner";
 
+import './AboutPage.css'
 export default function AboutPage() {
 
     const ref = useRef(null)
@@ -24,7 +25,7 @@ export default function AboutPage() {
             />
 
             <section className="container mx-auto py-8">
-                <div className="p-4 m-4 bg-gray-50">
+                <div className="first-para">
                     <p className="text-lg text-gray-800">
                         At <span className="font-bold text-yellow-600">Balkan Nectar</span>, we open our hive to you, inviting you to experience the pure essence of honey in its most authentic form. Rooted in a cherished family tradition of beekeeping, our story weaves through time, capturing the artistry of honey-making passed down through generations.
                         Welcome to a realm where golden hues and rich flavors converge, reflecting our unwavering commitment to delivering the highest quality honey to our valued customers. Our journey begins with a dedication to the raw, organic, and unadulterated beauty of honey. Every jar is a testament to the meticulous care and respect we hold for the bees and the bountiful landscapes they roam.
@@ -33,8 +34,8 @@ export default function AboutPage() {
                     </p>
                 </div>
 
-                <div id='history' className="p-4 m-4 bg-productWhite">
-                    <h2 className="text-2xl font-bold mt-4 mb-2 text-yellow-600">Our History</h2>
+                <div id='history' className="second-para">
+                    <h2 className="header">Our History</h2>
                     <p className="text-gray-700">
                         For centuries, the tapestry of our family has been intricately woven with the delicate threads of beekeeping—a time-honored art and an enduring science. Our story unfurls through the pages of history, marked by a profound passion for the wonders of nature, an unyielding love for the industrious bees, and an unwavering commitment to the alchemy of producing honey in its purest, most unspoiled form.
                         Our journey began with a humble hive and a boundless curiosity, cultivating a deep connection with the natural world and the extraordinary creatures that populate it. Guided by reverence for the intricate dance of bees and the artistry of honey-making, we embarked on a path of discovery, dedicating ourselves to the pursuit of perfection in every drop.
@@ -43,8 +44,8 @@ export default function AboutPage() {
                     </p>
                 </div>
 
-                <div className="p-4 m-4 bg-gray-50">
-                    <h2 className="text-2xl font-bold mt-4 mb-2 text-yellow-600">Our Values</h2>
+                <div className="first-para">
+                    <h2 className="header">Our Values</h2>
                     <p className="text-gray-700">
                         At Balkan Nectar, we hold true to traditional values. We believe in sustainable and ethical beekeeping practices
                         that respect the environment and ensure the well-being of our bees. Our commitment to quality, purity, and
@@ -52,8 +53,8 @@ export default function AboutPage() {
                     </p>
                 </div>
 
-                <div id='organic' className="p-4 m-4 bg-productWhite">
-                    <h2 className="text-2xl font-bold mt-4 mb-2 text-yellow-600">100% Pure Raw Organic Honey</h2>
+                <div id='organic' className="second-para">
+                    <h2 className="header">100% Pure Raw Organic Honey</h2>
                     <p className="text-gray-700">
                         Our honey is 100% pure, raw, and organic. We take pride in offering you a product that is free from additives,
                         preservatives, and any artificial substances. Each jar of Balkan Nectar honey is a testament to our dedication to
@@ -70,7 +71,7 @@ export default function AboutPage() {
                 id="contact"
                 ref={ref}
                 className="container mx-auto py-8">
-                <h2 className="text-2xl font-bold mt-4 mb-2 text-yellow-600">Contact us</h2>
+                <h2 className="header">Contact us</h2>
                 <div className="flex flex-wrap mt-5">
                     <div className="w-full md:w-1/2 px-2 mb-4">
                         <h3 className="text-lg font-semibold">Our Address</h3>

@@ -10,7 +10,7 @@ export default {
       colors: {
         cfb491: '#cfb491',
         starsBrown: '#BD871F',
-        productWhite: '#FFF8EE',
+        productWhite: '#FFF7E8',
         btnHover: '#edd4b3'
       },
     },

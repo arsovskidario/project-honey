@@ -1,6 +1,8 @@
 import './MainPage.css'
 import Banner from '../../banner/Banner'
 import ProductList from '../../product/list/ProductList'
+import NewsLetter from './newsletter/Newsletter'
+
 export default function MainPage() {
     return (
         <main>
@@ -11,6 +13,8 @@ export default function MainPage() {
              isMainPage={true}
              />
             <ProductList productName ="featured products"/>
+
+            <NewsLetter/>
         </main>
     )
 }

@@ -14,12 +14,12 @@ export default function ProductPage() {
 
     return <main className="flex flex-col items-center justify-center">
         <h1 className="mt-10 text-2xl">Products</h1>
-        <div className="flex md:flex-row flex-col items-center justify-around mt-10 w-5/6 bg-productWhite">
+        <div className="flex md:flex-row flex-col items-center justify-around mt-5 w-5/6">
             <ProductList productName='' />
         </div>
         <button
             onClick={() => setIsEditActive(true)}
-            className="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-600">
+            className="h-10 px-5 m-5 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-600">
             Create product
         </button>
 

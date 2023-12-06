@@ -57,7 +57,7 @@ export default function Buy({
             </div>
 
             <button onClick={addItemToCartHandler}
-                className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-2.5 py-1.5 text-center overflow-clip">
+                className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-5 py-2.5 text-center overflow-clip">
                 Add to cart
             </button>
             <button onClick={copyToClipboardHanlder}
@@ -69,7 +69,7 @@ export default function Buy({
 
             {isUserAdmin() &&
                 <button onClick={() => setIsEditActive(true)}
-                    className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-2.5 py-1.5 text-center overflow-clip">
+                    className="m-1 text-white bg-cfb491 hover:bg-btnHover font-normal rounded-lg text-sm px-5 py-2.5 text-center overflow-clip">
                     Edit
                 </button>
             }

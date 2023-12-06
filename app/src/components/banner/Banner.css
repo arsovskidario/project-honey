@@ -15,8 +15,6 @@
 	font-weight: bold;
 }
 
-
-
 .hex-btn:before {
     content:"";
     transform: rotate(45deg);

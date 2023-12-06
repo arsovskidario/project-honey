@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export default function CheckoutItem({
     _id,
@@ -8,12 +8,18 @@ export default function CheckoutItem({
     orderQuantity,
     clearItem
 }) {
+    const navigate = useNavigate();
+
+    const onProductImageClick = () => {
+        navigate(`/product-details/${_id}`);
+    }
 
     return <div className="flex justify-between items-center">
         <div id="product-img" className="p-2 w-1/4">
-            <Link to={`/product-details/${_id}`}>
-                <img src={imgUrl} alt="product-image" />
-            </Link>
+                <img 
+                onClick={onProductImageClick}
+                src={imgUrl} alt="product-image"
+                className="cursor-pointer transition duration-300 transform hover:scale-105" />
         </div>
 
         <div id="product-info" className="p-2 w-1/4">
