@@ -1,6 +1,6 @@
-# 🍯 Project honey 
+# Project honey 🍯 
 
-## 📝 Description 
+## Description 
 Project Honey is an innovative e-commerce application crafted specifically for beekeepers, inspired by the legacy of my father—a seasoned professional beekeeper with over 35 years of experience. Recognizing the evolving landscape of the beekeeping industry, this app aims to bring a modern touch to his traditional business.
 
 Drawing on the rich expertise of a seasoned beekeeper, Project Honey is designed to empower apiarists with advanced tools and a seamless digital platform. The app is meticulously tailored to cater to the unique needs of beekeepers, providing a comprehensive solution that simplifies and modernizes every aspect of their operations
@@ -29,7 +29,7 @@ Drawing on the rich expertise of a seasoned beekeeper, Project Honey is designed
 - **Products:** The admin can view all products in the app and create new products using the 'Create Product' button, which opens a popup for entering relevant product details.
 - **Edit:** The admin can edit product details via the Product Details page and also delete unwanted products.
 
-## 💻 Installation 
+## 💻  Installation 
 This app uses React, to run the app you need go to **/app** and run the following commands:
 ```bash
 npm i         # Install relevant packages
