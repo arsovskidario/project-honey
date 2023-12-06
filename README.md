@@ -40,8 +40,3 @@ The server used for the backend is a mock server filled with relevant products. 
 ```bash
 node server.js
 ```
-
-### Must
-- [ ] Featured items should filter to fetch only name,img, review, id of item
-
-### Additional functionality
