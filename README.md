@@ -29,20 +29,17 @@ Drawing on the rich expertise of a seasoned beekeeper, Project Honey is designed
 - **Products:** The admin can view all products in the app and create new products using the 'Create Product' button, which opens a popup for entering relevant product details.
 - **Edit:** The admin can edit product details via the Product Details page and also delete unwanted products.
 
-##
 ## Installation
+This app uses React, to run the app you need go to **/app** and run the following commands:
+```bash
+npm i         # Install relevant packages
+npm run dev   # Run the app locally
+```
 
-### Requirements
-
-- [ ] 3 dynamic pages
-- [ ] Catalog view
-- [ ] Details view
-- [ ] Products collection
-- [ ] Admin user(update, delete, add products) + Normal user(buy item) + unlogged user(browse)
-- [ ] Authentication
-- [ ] Handling/validation 
-- [ ] Documentation/project structure
-
+The server used for the backend is a mock server filled with relevant products. To access run this server go to **/server** and run the following command:
+```bash
+node server.js
+```
 
 ### Must
 - [ ] Featured items should filter to fetch only name,img, review, id of item
