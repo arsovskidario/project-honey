@@ -20,7 +20,7 @@ export default function ProductReviews({
 }) {
     const navigate = useNavigate();
     const { username, accessToken } = useContext(AuthContext)
-    
+
     const [errors, setErrors] = useState('');
     const [reviews, setReviews] = useState([]);
 
@@ -70,12 +70,15 @@ export default function ProductReviews({
 
 
     return (
-        <section id={`product-${_id}`} className="bg-productWhite mt-10 p-4">
+        <section id={`product-${_id}`} className="bg-white mt-10 p-4">
             <h1 className="ml-6 mb-2">Product reviews</h1>
-            <div id="reviews" className="flex flex-col justify-start pb-5 ml-10 border-2 border-white">
+            <ul class="list-none mb-0">
+                <li class="border-b-2 border-black w-36 ml-6"></li>
+            </ul>
+            <div id="reviews" className="flex flex-col justify-start pb-5 ml-10">
                 {reviews.map(review => {
-                    return <div key={review._id} className="flex md:flex-row flex-col mt-6 bg-neutral-50">
-                        <div className="ml-6 mt-1">
+                    return <div key={review._id} className="flex md:flex-row flex-col mt-6 w-full">
+                        <div className="ml-6 mt-1 w-full">
                             <h2>{review.userName}</h2>
                             <div className="flex items-center space-x-1 rtl:space-x-reverse">
                                 <svg className="w-4 h-4 text-starsBrown" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
@@ -96,8 +99,11 @@ export default function ProductReviews({
                                 <span className="text-starsBrown text-xs font-semibold px-2.5 py-0.5 roundedms-3 overflow-clip">{review.rating}</span>
                             </div>
                             <div className="mt-4 ml-5">
-                            <p className="p-4">{review.comment}</p>
-                        </div>
+                                <p className="p-4">{review.comment}</p>
+                            </div>
+                            <ul class="list-none mb-0">
+                                <li class="border-b border-stone-300 w-full mt-5"></li>
+                            </ul>
 
                         </div>
 

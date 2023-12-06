@@ -6,7 +6,7 @@ export default function ProductDetailsPage() {
     const { productId } = useParams();
     
     return (
-        <main className="h-max"> 
+        <main className="h-max bg-productWhite"> 
             <ProductDetails _id={productId} />
             <ProductReviews _id={productId} />
         </main>

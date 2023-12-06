@@ -1,0 +1,11 @@
+.first-para {
+    @apply p-4 m-4 bg-gray-50
+}
+
+.second-para {
+    @apply p-4 m-4 bg-productWhite
+}
+
+.header {
+    @apply text-2xl font-bold mt-4 mb-2 text-yellow-600
+}

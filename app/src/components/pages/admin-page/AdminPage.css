@@ -1,0 +1,3 @@
+.btn {
+    @apply md:w-1/6 w-1/3 p-5 m-3 text-white bg-cfb491 hover:bg-btnHover font-medium rounded-lg text-sm text-center 
+}

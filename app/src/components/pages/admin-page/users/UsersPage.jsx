@@ -20,7 +20,7 @@ export default function UsersPage() {
 
     return <main className="flex flex-col items-center justify-center">
         <h1 className="mt-10 text-2xl">Users</h1>
-        <div className="flex flex-col items-center justify-around mt-10 w-5/6 bg-productWhite">
+        <div className="flex flex-col items-center justify-start mt-10 w-5/6 h-screen">
             {userDetails.map(user =>
                 <UserItem key={user._id} {...user}/>
             )}
