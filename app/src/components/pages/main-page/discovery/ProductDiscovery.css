@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.animation {
+    @apply cursor-pointer transition duration-300 transform hover:scale-105
+}
