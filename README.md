@@ -36,7 +36,7 @@ npm i         # Install relevant packages
 npm run dev   # Run the app locally
 ```
 
-The server used for the backend is a mock server filled with relevant products. To access run this server go to **/server** and run the following command:
+The server used for the backend is a mock server filled with relevant products. To access run this server go to **/mock-server** and run the following command:
 ```bash
 node server.js
 ```
