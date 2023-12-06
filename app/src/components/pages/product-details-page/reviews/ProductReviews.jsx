@@ -72,8 +72,8 @@ export default function ProductReviews({
     return (
         <section id={`product-${_id}`} className="bg-white mt-10 p-4">
             <h1 className="ml-6 mb-2">Product reviews</h1>
-            <ul class="list-none mb-0">
-                <li class="border-b-2 border-black w-36 ml-6"></li>
+            <ul className="list-none mb-0">
+                <li className="border-b-2 border-black w-36 ml-6"></li>
             </ul>
             <div id="reviews" className="flex flex-col justify-start pb-5 ml-10">
                 {reviews.map(review => {
@@ -101,8 +101,8 @@ export default function ProductReviews({
                             <div className="mt-4 ml-5">
                                 <p className="p-4">{review.comment}</p>
                             </div>
-                            <ul class="list-none mb-0">
-                                <li class="border-b border-stone-300 w-full mt-5"></li>
+                            <ul className="list-none mb-0">
+                                <li className="border-b border-stone-300 w-full mt-5"></li>
                             </ul>
 
                         </div>
