@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 
 import './Header.css';
@@ -8,6 +8,22 @@ import ShoppingCartContext from "../../contexts/ShoppingCartContext";
 
 export default function Header() {
     const [isDropDownToggled, setIsDropDownToggled] = useState('hidden');
+    const [searchValue, setSearchValue] = useState('');
+
+    const navigate = useNavigate();
+
+    const onChangeSearchHandler = (e) => {
+        setSearchValue(oldState => (
+            e.target.value
+        ));
+    }
+
+    const handleSearchKeyPress = async (e) => {
+        if (e.key === 'Enter') {
+            navigate(`/search?name=${searchValue}`);
+          }
+    }
+    
 
     const { cartSize } = useContext(ShoppingCartContext)
 
@@ -74,7 +90,13 @@ export default function Header() {
                             </svg>
                             <span className="sr-only">Search icon</span>
                         </div>
-                        <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-5 hover:border-cfb491 focus:border-cfb491 focus:outline-none" placeholder="Search..." />
+                        <input 
+                        type="text" 
+                        id="search-navbar" 
+                        value={searchValue}
+                        onChange={onChangeSearchHandler}
+                        onKeyDown={handleSearchKeyPress}
+                        className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-5 hover:border-cfb491 focus:border-cfb491 focus:outline-none" placeholder="Search..." />
                     </div>
                     <button data-collapse-toggle="navbar-search"
                         type="button"
