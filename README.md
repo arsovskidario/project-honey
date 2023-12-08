@@ -12,6 +12,7 @@ Drawing on the rich expertise of a seasoned beekeeper, Project Honey is designed
 - **Details View:** Guests can view specific product details, including description, price, reviews, and have the option to add the selected product to the shopping cart.
 - **Shopping Cart:** Guests can add products to the shopping cart and review the added items. However, they cannot proceed to checkout.
 - **Newsletter:** Guests can subscribe to the site's newsletter via email.
+- **Search:** Guests can use the search bar to find products based on their name.
 - **Login:** Guests can access the login page to log in.
 - **Sign Up:** Guests can sign up for the app.
 
