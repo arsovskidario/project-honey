@@ -53,6 +53,16 @@ export async function deleteProduct(_id, adminToken) {
     return response.json();
 }
 
+export async function getProductsByName(searchTerm) {
+    const encodedSearchTerm = encodeURIComponent(searchTerm);
+    const response = await fetch(`${baseUrl}/products?where=name%20LIKE%20%22${encodedSearchTerm}%22`);
+    if (!response.ok) {
+        throw new Error('Service is unavaibable');
+    }
+    
+    return response.json();
+}
+
 export async function editProductInfo(_id, details, token) {
     const url = `${baseUrl}/products/${_id}`;
     const response = await fetch(url,{

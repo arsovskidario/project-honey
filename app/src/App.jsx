@@ -22,6 +22,7 @@ import ProductPage from './components/pages/admin-page/ProductPage'
 import UsersPage from './components/pages/admin-page/users/UsersPage'
 import AboutPage from './components/pages/about-page/AboutPage'
 import { ERROR_CODE } from './components/constants/constants'
+import SearchResultsPage from './components/pages/search-results-page/SearchResultsPage'
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
             <Route path="/gifts" element={<GiftPage />} />
             <Route path="/product-details/:productId" element={<ProductDetailsPage />} />
             <Route path="/checkout" element={<CheckOutPage />} />
+            <Route path ="/search" element ={<SearchResultsPage/>}/>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/error" element={<ErrorPage />} />

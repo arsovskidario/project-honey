@@ -19,7 +19,7 @@ export default function AboutPage() {
         <main>
 
             <Banner
-                bannerUrl={'https://lh4.googleusercontent.com/6yf4VDZ05JskYIhJf6mR2lfXAWdrJQbQMc4lIdJALiu0qUueqYIunfjALRJ4iW0psY3x7lMU0aRRT67PQBY3_jjfTFxK8wTp59ITSYmEVAoVEPwQiCVa7zjH5B2ruJEHTOrPJ1ivOYVxjyDfdg'}
+                bannerUrl={'https://i.postimg.cc/T1f6ZDGX/image.png'}
                 bannerName={'About us'}
                 isMainPage={false}
             />
